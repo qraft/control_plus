@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "ssl_options": {
+          "versions": [
+            "tlsv1.2"
+          ]
+        }
+      },
+      "request_body": "",
+      "url": "https://elitefit.opencontrolplus.com/cp_api?page=1&limit=1000&key=558f5b7c12eae18e695fb40e37b0e50130a55201&method=clients_list"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"error\":\"0\",\"id\":null,\"result\":{\"current_page\":\"1\",\"total_pages\":\"31\",\"users\":{\"1016570\":{\"photo\":\"\",\"sales\":\"\",\"club_card_amount\":\"0.0\",\"birthday\":\"1967-07-27\",\"campaign\":\"\",\"personal_coach\":\"\",\"phone\":\"0612345678\",\"city\":\"Amsterdam\",\"province\":\"\",\"sex\":\"M\",\"comment\":\"Just some comment here\",\"brought_by\":\"\",\"interjection\":\"Van den\",\"member_number\":\"24\",\"address\":\"Somestreet 1\",\"zipcode\":\"1111AA\",\"country\":\"Netherlands\",\"lastname\":\"Testuser\",\"updated_at\":\"2017-03-29 14:22:17\",\"labels\":\"Afvallers /niet geselecteerd/ in de toekomst contacten\",\"entered\":\"Web-in\",\"mob_phone\":\"\",\"email\":\"someone@gmail.com\",\"name\":\"Test\"},\"1014557\":{\"photo\":\"\",\"sales\":\"\",\"club_card_amount\":\"0.0\",\"birthday\":\"1984-06-09\",\"campaign\":\"\",\"personal_coach\":\"\",\"phone\":\"0612345678\\\"\",\"city\":\"Den Haag\",\"province\":\"\",\"sex\":\"F\",\"comment\":\"Aangemeld bij Demodag. Na telefonische intake afgesproken op de wachtlijst voor pilot 3 of 4 . Stopt per 1 aug. #06  heeft geen rede op gegeven.\",\"brought_by\":\"\",\"interjection\":\"\",\"member_number\":\"45\",\"address\":\"Somewhere 123\",\"zipcode\":\"2211GB\",\"country\":\"Netherlands\",\"lastname\":\"Testuser2\",\"updated_at\":\"2017-08-03 13:24:04\",\"labels\":\"Afvallers /niet geselecteerd/ in de toekomst contacten\",\"entered\":\"Web-in\",\"mob_phone\":\"0612345678\",\"email\":\"test@user.com\",\"name\":\"Test\"}}}}",
+      "headers": {
+        "Date": "Mon, 20 Nov 2017 09:33:10 GMT",
+        "Server": "Apache/2.2.15 (CentOS)",
+        "Expires": "-1",
+        "Cache-Control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "X-Powered-By": "",
+        "X-Runtime": "0.48277",
+        "Pragma": "no-cache",
+        "P3P": "policyref=\"/w3c/p3p.xml\", CP=\"NON DSP ADM DEV PSD IVDo OUR IND STP PHY PRE NAV UNI OHO:*.opencontrolplus.com\"",
+        "ETag": "\"0490fe3318253929f0ec1cb4ca1bc04f\"",
+        "Set-Cookie": "_mysportpages_session_id_=051f3a5c205230c1638a9a4c9f8f3a23; domain=.opencontrolplus.com; path=/; HttpOnly",
+        "Content-Length": "17809",
+        "Last-Modified": "Mon, 20 Nov 2017 09:16:30 GMT",
+        "Status": "200 OK",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
