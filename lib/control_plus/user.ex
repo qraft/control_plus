@@ -37,9 +37,9 @@ defmodule ControlPlus.User do
     |> Enum.reduce(
          %ControlPlus.User{},
          fn ({key, value}, client) ->
-           Map.put(client, String.to_atom(key), value)
+           Map.put(client, String.to_atom(key), ControlPlus.Helpers.CastHelper.cast(value))
          end
        )
-    |> Map.put(:id, String.to_integer(id))
+    |> Map.put(:id, id)
   end
 end
