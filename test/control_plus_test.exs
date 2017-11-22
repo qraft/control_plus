@@ -31,7 +31,7 @@ defmodule ControlPlusTest do
                      interjection: "",
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser2",
-                     member_number: "45",
+                     member_number: 45,
                      mob_phone: "0612345678",
                      name: "Test",
                      personal_coach: "",
@@ -58,7 +58,7 @@ defmodule ControlPlusTest do
                      interjection: "Van den",
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser",
-                     member_number: "24",
+                     member_number: 24,
                      mob_phone: "",
                      name: "Test",
                      personal_coach: "",
@@ -99,7 +99,7 @@ defmodule ControlPlusTest do
                  address: nil,
                  __struct__: ControlPlus.User,
                  members_lastname: "Doe",
-                 json_code: "14",
+                 json_code: 14,
                  members_city: "Utrecht",
                  country: "Netherlands",
                  mob_phone: nil,
@@ -121,7 +121,7 @@ defmodule ControlPlusTest do
                  city: nil,
                  entered: "Web-in"
                }
-             } == ControlPlus.Api.client_details(1017831)
+             } = ControlPlus.Api.client_details(1017831)
     end
   end
 

@@ -40,6 +40,6 @@ defmodule ControlPlus.User do
            Map.put(client, String.to_atom(key), ControlPlus.Helpers.CastHelper.cast(value))
          end
        )
-    |> Map.put(:id, id)
+    |> Map.put(:id, ControlPlus.Helpers.CastHelper.cast(id))
   end
 end

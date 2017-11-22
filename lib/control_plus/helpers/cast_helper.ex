@@ -16,6 +16,9 @@ defmodule ControlPlus.Helpers.CastHelper do
   def cast(value), do: value
 
   @spec maybe_cast_to_int(any) :: any
+  #numbers like "0612345678" should stay string else it drops the leading 0
+  defp maybe_cast_to_int("0"), do: 0
+  defp maybe_cast_to_int("0" <> rest = value) when is_binary(value), do: value
   defp maybe_cast_to_int(value) when is_binary(value)  do
     case Integer.parse(value) do
       {int, ""} -> int
