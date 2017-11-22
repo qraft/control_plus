@@ -171,7 +171,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "member_visits_for_sync" do
-    use_cassette "ctrl_plus/membe_visits_for_sync" do
+    use_cassette "ctrl_plus/member_visits_for_sync" do
       {
         :ok,
         %{
