@@ -1,4 +1,4 @@
-defmodule ControlPlusTest do
+defmodule ControlPlus.ApiTest do
 
   use ExUnit.Case, async: false
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
@@ -18,9 +18,9 @@ defmodule ControlPlusTest do
                  users: [
                    %ControlPlus.User{
                      address: "Somewhere 123",
-                     birthday: "1984-06-09",
-                     brought_by: "",
-                     campaign: "",
+                     birthday: ~D[1984-06-09],
+                     brought_by: nil,
+                     campaign: nil,
                      city: "Den Haag",
                      club_card_amount: 0.0,
                      comment: "Aangemeld bij Demodag. Na telefonische intake afgesproken op de wachtlijst voor pilot 3 of 4 . Stopt per 1 aug. #06  heeft geen rede op gegeven.",
@@ -28,26 +28,26 @@ defmodule ControlPlusTest do
                      email: "test@user.com",
                      entered: "Web-in",
                      id: 1014557,
-                     interjection: "",
+                     interjection: nil,
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser2",
                      member_number: 45,
                      mob_phone: "0612345678",
                      name: "Test",
-                     personal_coach: "",
-                     phone: "0612345678\"",
-                     photo: "",
-                     province: "",
-                     sales: "",
+                     personal_coach: nil,
+                     phone: "0612345678",
+                     photo: nil,
+                     province: nil,
+                     sales: nil,
                      sex: "F",
                      updated_at: "2017-08-03 13:24:04",
                      zipcode: "2211GB"
                    },
                    %ControlPlus.User{
                      address: "Somestreet 1",
-                     birthday: "1967-07-27",
-                     brought_by: "",
-                     campaign: "",
+                     birthday: ~D[1967-07-27],
+                     brought_by: nil,
+                     campaign: nil,
                      city: "Amsterdam",
                      club_card_amount: 0.0,
                      comment: "Just some comment here",
@@ -59,13 +59,13 @@ defmodule ControlPlusTest do
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser",
                      member_number: 24,
-                     mob_phone: "",
+                     mob_phone: nil,
                      name: "Test",
-                     personal_coach: "",
+                     personal_coach: nil,
                      phone: "0612345678",
-                     photo: "",
-                     province: "",
-                     sales: "",
+                     photo: nil,
+                     province: nil,
+                     sales: nil,
                      sex: "M",
                      updated_at: "2017-03-29 14:22:17",
                      zipcode: "1111AA"
@@ -82,20 +82,20 @@ defmodule ControlPlusTest do
                :ok,
                %{
                  club_card_amount: nil,
-                 sales: "",
+                 sales: nil,
                  zipcode: nil,
                  id: 1017831,
                  lastname: nil,
-                 members_interjection: "",
+                 members_interjection: nil,
                  members_address: "Somestreet 1",
                  email: nil,
                  phone: nil,
                  members_sex: "F",
                  comment: nil,
-                 personal_coach: "",
+                 personal_coach: nil,
                  bank_account: "NL08INGB0123456789",
-                 members_phone: "",
-                 birthday: "1981-06-24",
+                 members_phone: nil,
+                 birthday: ~D[1981-06-24],
                  address: nil,
                  __struct__: ControlPlus.User,
                  members_lastname: "Doe",
@@ -105,18 +105,18 @@ defmodule ControlPlusTest do
                  mob_phone: nil,
                  interjection: nil,
                  updated_at: nil,
-                 club_id: "",
+                 club_id: nil,
                  members_name: "Jane",
                  members_mob_phone: "0612345678",
                  members_zipcode: "1111AB",
                  members_email: "jane@doe.com",
-                 province: "",
+                 province: nil,
                  sex: nil,
                  member_number: nil,
                  labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
-                 campaign: "",
+                 campaign: nil,
                  photo: nil,
-                 brought_by: "",
+                 brought_by: nil,
                  name: nil,
                  city: nil,
                  entered: "Web-in"
@@ -167,6 +167,44 @@ defmodule ControlPlusTest do
                  }
                }
              } == ControlPlus.Api.activities()
+    end
+  end
+
+  test "member_visits_for_sync" do
+    use_cassette "ctrl_plus/membe_visits_for_sync" do
+      {
+        :ok,
+        %{
+          activities: %{
+            1 => %ControlPlus.Activity{
+              count: 1,
+              date: ~D[2017-08-17],
+              end_date: nil,
+              id: 18345,
+              name: "PowerBuilding Bench",
+              price: nil,
+              schedule: nil,
+              start: ~T[19:00:00],
+              start_date: nil,
+              status: 0,
+              sub_type_id: nil
+            },
+            2 => %ControlPlus.Activity{
+              count: 1,
+              date: ~D[2017-09-12],
+              end_date: nil,
+              id: 16336,
+              name: "PowerBuilding Squat",
+              price: nil,
+              schedule: nil,
+              start: ~T[19:00:00],
+              start_date: nil,
+              status: 0,
+              sub_type_id: nil
+            }
+          }
+        }
+      } = ControlPlus.Api.member_visits_for_sync(1016503, 100)
     end
   end
 end

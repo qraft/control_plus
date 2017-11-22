@@ -43,6 +43,7 @@ defmodule ControlPlus.Mixfile do
 
   defp deps do
     [
+      {:cortex, ">= 0.0.0", [only: [:dev, :test]]},
       {:credo, ">= 0.0.0", [only: :dev]},
       {:dialyxir, ">= 0.0.0", [only: :dev]},
       {:excoveralls, ">= 0.0.0", [only: :test]},

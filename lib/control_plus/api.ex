@@ -35,7 +35,7 @@ defmodule ControlPlus.Api do
   @spec activities :: {:ok, map} | {:error, any}
   def activities do
     case fetch(:req_act_shedule, sub_type_id: "") do
-      {:ok, data} -> remap_activities(data)
+      {:ok, data} -> remap_schedules(data)
       error -> error
     end
   end
@@ -44,7 +44,11 @@ defmodule ControlPlus.Api do
   def member_visits_for_sync(client_id, days_ago \\ 1) do
     from = ControlPlus.Helpers.DateHelper.format_date_days_ago(days_ago)
     to = ControlPlus.Helpers.DateHelper.format_date_days_from_now(7)
-    fetch(:req_current_reservations, client_id: client_id, start_date: from, end_date: to)
+
+    case fetch(:req_current_reservations, params: [client_id: client_id, start_date: from, end_date: to]) do
+      {:ok, data} -> remap_activities(data)
+      error -> error
+    end
   end
 
   @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil, non_neg_integer | nil) :: {:ok | map} | {:error, any}
@@ -104,6 +108,15 @@ defmodule ControlPlus.Api do
 
   @spec remap_activities(map) :: {:ok, map}
   defp remap_activities(data) do
+    result = data["activities"] |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
+
+    map = Map.put(%{}, :activities, result)
+
+    {:ok, map}
+  end
+
+  @spec remap_schedules(map) :: {:ok, map}
+  defp remap_schedules(data) do
     result = data["shedule"] |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
 
     map = Map.put(%{}, :schedule, result)

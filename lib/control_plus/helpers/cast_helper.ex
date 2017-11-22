@@ -13,6 +13,7 @@ defmodule ControlPlus.Helpers.CastHelper do
     |> maybe_cast_to_time
     |> maybe_cast_to_int
     |> maybe_cast_to_float
+    |> maybe_cast_to_nil
   end
   def cast(value), do: value
 
@@ -57,4 +58,8 @@ defmodule ControlPlus.Helpers.CastHelper do
     end
   end
   defp maybe_cast_to_time(value), do: value
+
+  @spec maybe_cast_to_nil(any) :: any
+  defp maybe_cast_to_nil(""), do: nil
+  defp maybe_cast_to_nil(value), do: value
 end

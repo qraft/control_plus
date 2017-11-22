@@ -24,10 +24,9 @@ defmodule ControlPlus.Helpers.DateHelper do
 
   @spec parse(String.t) :: {:ok, Date.t} | {:error, String.t}
   def parse(string) do
-    case Regex.named_captures(~r/^(?<day>\d{2})\/(?<month>\d{2})\/(?<year>\d{4})$/, string) do
-      %{"day" => day, "month" => month, "year" => year} -> Date.new(to_i(year), to_i(month), to_i(day))
-      _ -> {:error, "could not parse #{string}"}
-
+    case machine_notation(string) do
+      {:ok, _date} = result -> result
+      _ -> human_notation(string)
     end
   end
 
@@ -38,4 +37,20 @@ defmodule ControlPlus.Helpers.DateHelper do
   end
 
   defp to_i(binary), do: String.to_integer(binary)
+
+  defp machine_notation(string) do
+    case Regex.named_captures(~r/^(?<year>\d{4})[-|\/](?<month>\d{2})[-|\/](?<day>\d{2})$/, string) do
+      %{"day" => day, "month" => month, "year" => year} -> Date.new(to_i(year), to_i(month), to_i(day))
+      _ -> {:error, "could not parse #{string}"}
+
+    end
+  end
+
+  defp human_notation(string) do
+    case Regex.named_captures(~r/^(?<day>\d{2})[-|\/](?<month>\d{2})[-|\/](?<year>\d{4})$/, string) do
+      %{"day" => day, "month" => month, "year" => year} -> Date.new(to_i(year), to_i(month), to_i(day))
+      _ -> {:error, "could not parse #{string}"}
+
+    end
+  end
 end

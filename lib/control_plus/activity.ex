@@ -7,10 +7,15 @@ defmodule ControlPlus.Activity do
   defstruct [
     :id,
     :name,
+    :count,
+    :start,
+    :date,
     :end_date,
     :schedule,
     :start_date,
-    :sub_type_id
+    :sub_type_id,
+    :price,
+    :status
   ]
 
   @mapping %{
@@ -18,7 +23,7 @@ defmodule ControlPlus.Activity do
     "enddate" => :end_date,
     "startdate" => :start_date,
     "activity_id" => :id,
-    "shedule" => :schedule
+    "shedule" => :schedule,
   }
 
   @spec parse({String.t, map}) :: {integer, map}
@@ -38,6 +43,7 @@ defmodule ControlPlus.Activity do
   @spec map_key(String.t) :: atom
   defp map_key(key), do: Map.get(@mapping, key, String.to_atom(key))
 
+  defp cast_schedule(nil), do: nil
   defp cast_schedule(
          %{
            "1" => %{
