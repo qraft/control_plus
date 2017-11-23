@@ -132,36 +132,72 @@ defmodule ControlPlus.ApiTest do
                %{
                  schedule: %{
                    18 => %ControlPlus.Activity{
+                     capacity: nil,
+                     count: nil,
+                     date: nil,
+                     description: nil,
+                     description_long: nil,
                      end_date: ~D[2017-06-05],
                      id: 17916,
+                     image: nil,
                      name: "MURPH special",
-                     schedule: %{
+                     price: nil,
+                     schedule: %ControlPlus.Schedule{
+                       available: nil,
                        start: ~T[09:00:00],
+                       waitlist_size: nil,
                        weekday: 1
                      },
+                     staff_id: nil,
+                     start: nil,
                      start_date: ~D[2017-06-05],
+                     status: nil,
                      sub_type_id: 0
                    },
                    129 => %ControlPlus.Activity{
+                     capacity: nil,
+                     count: nil,
+                     date: nil,
+                     description: nil,
+                     description_long: nil,
                      end_date: ~D[2019-03-17],
                      id: 16939,
+                     image: nil,
                      name: "Your personal coach",
-                     schedule: %{
+                     price: nil,
+                     schedule: %ControlPlus.Schedule{
+                       available: nil,
                        start: ~T[10:00:00],
+                       waitlist_size: nil,
                        weekday: 6
                      },
+                     staff_id: nil,
+                     start: nil,
                      start_date: ~D[2017-02-27],
+                     status: nil,
                      sub_type_id: 0
                    },
                    166 => %ControlPlus.Activity{
+                     capacity: nil,
+                     count: nil,
+                     date: nil,
+                     description: nil,
+                     description_long: nil,
                      end_date: ~D[2023-03-17],
                      id: 18337,
+                     image: nil,
                      name: "Your personal coach",
-                     schedule: %{
+                     price: nil,
+                     schedule: %ControlPlus.Schedule{
+                       available: nil,
                        start: ~T[20:15:00],
+                       waitlist_size: nil,
                        weekday: 2
                      },
+                     staff_id: nil,
+                     start: nil,
                      start_date: ~D[2017-02-27],
+                     status: nil,
                      sub_type_id: 0
                    }
                  }
@@ -171,12 +207,25 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "member_visits_for_sync" do
-    use_cassette "ctrl_plus/member_visits_for_sync" do
+    use_cassette "ctrl_plus/member_visits" do
       {
         :ok,
         %{
           activities: %{
-            1 => %ControlPlus.Activity{
+            16 => %ControlPlus.Activity{
+              count: 1,
+              date: ~D[2017-05-08],
+              end_date: nil,
+              id: 16443,
+              name: "PowerBuilding Deadlift",
+              price: nil,
+              schedule: nil,
+              start: ~T[19:00:00],
+              start_date: nil,
+              status: 0,
+              sub_type_id: nil
+            },
+            27 => %ControlPlus.Activity{
               count: 1,
               date: ~D[2017-08-17],
               end_date: nil,
@@ -188,23 +237,76 @@ defmodule ControlPlus.ApiTest do
               start_date: nil,
               status: 0,
               sub_type_id: nil
-            },
-            2 => %ControlPlus.Activity{
-              count: 1,
-              date: ~D[2017-09-12],
-              end_date: nil,
-              id: 16336,
-              name: "PowerBuilding Squat",
-              price: nil,
-              schedule: nil,
-              start: ~T[19:00:00],
-              start_date: nil,
-              status: 0,
-              sub_type_id: nil
             }
           }
         }
-      } = ControlPlus.Api.member_visits_for_sync(1016503, 100)
+      } = ControlPlus.Api.member_visits(1016503)
+    end
+  end
+
+  test "activity details" do
+    use_cassette "ctrl_plus/activity_details" do
+      assert {
+               :ok,
+               %{
+                 activities: %{
+                   5 => %{
+                     __struct__: ControlPlus.Activity,
+                     capacity: 24,
+                     count: nil,
+                     date: nil,
+                     description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nLevel 1\n</body>\n</html>",
+                     description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
+                     end_date: nil,
+                     end_time: ~T[18:15:00],
+                     id: 16343,
+                     image: "/uploads/27/35/85/86/metcon-800x450.jpg",
+                     name: "MetCon30",
+                     price: nil,
+                     schedule: %ControlPlus.Schedule{
+                       available: 2,
+                       start: ~T[17:45:00],
+                       waitlist_size: 0,
+                       weekday: nil
+                     },
+                     staff_id: nil,
+                     staff_name: nil,
+                     start: nil,
+                     start_date: nil,
+                     start_time: ~T[17:45:00],
+                     status: nil,
+                     sub_type_id: nil
+                   },
+                   11 => %{
+                     __struct__: ControlPlus.Activity,
+                     capacity: 12,
+                     count: nil,
+                     date: nil,
+                     description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nlevel 1\n</body>\n</html>",
+                     description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
+                     end_date: nil,
+                     end_time: ~T[20:00:00],
+                     id: 18575,
+                     image: "/uploads/27/88/24/13/app_bg_bench.jpg",
+                     name: "PowerBuilding Bench",
+                     price: nil,
+                     schedule: %ControlPlus.Schedule{
+                       available: 4,
+                       start: ~T[19:00:00],
+                       waitlist_size: 0,
+                       weekday: nil
+                     },
+                     staff_id: nil,
+                     staff_name: nil,
+                     start: nil,
+                     start_date: nil,
+                     start_time: ~T[19:00:00],
+                     status: nil,
+                     sub_type_id: nil
+                   }
+                 }
+               }
+             } == ControlPlus.Api.activity_details()
     end
   end
 end

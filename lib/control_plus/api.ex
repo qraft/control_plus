@@ -40,27 +40,23 @@ defmodule ControlPlus.Api do
     end
   end
 
-  @spec member_visits_for_sync(non_neg_integer, non_neg_integer | nil) :: {:ok | map} | {:error, any}
-  def member_visits_for_sync(client_id, days_ago \\ 1) do
-    from = ControlPlus.Helpers.DateHelper.format_date_days_ago(days_ago)
-    to = ControlPlus.Helpers.DateHelper.format_date_days_from_now(7)
-
+  @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil) :: {:ok | map} | {:error, any}
+  def member_visits(client_id, from \\ nil, to \\ nil) do
+    to = to || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
+    from = from || ControlPlus.Helpers.DateHelper.format_date_days_ago(365)
     case fetch(:req_current_reservations, params: [client_id: client_id, start_date: from, end_date: to]) do
       {:ok, data} -> remap_activities(data)
       error -> error
     end
   end
 
-  @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil, non_neg_integer | nil) :: {:ok | map} | {:error, any}
-  def member_visits(client_id, from \\ nil, to \\ nil, days_ago \\ 90) do
-    to = to || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
-    from = from || ControlPlus.Helpers.DateHelper.format_date_days_ago(days_ago)
-    fetch(:req_current_reservations, client_id: client_id, start_date: from, end_date: to)
-  end
-
-  @spec activity_details(Date.t) :: {:ok | map} | {:error, any}
-  def activity_details(date) do
-    fetch(:req_activity_group_details, date: date)
+  @spec activity_details(Date.t | nil) :: {:ok | map} | {:error, any}
+  def activity_details(date \\ nil) do
+    date = date || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
+    case fetch(:req_activity_group_details, date: date) do
+      {:ok, data} -> remap_activities(data)
+      error -> error
+    end
   end
 
   @spec reservations(Date.t, non_neg_integer) :: {:ok | map} | {:error, any}
@@ -77,7 +73,7 @@ defmodule ControlPlus.Api do
   defp fetch(method, query) do
     defaults = [key: Application.get_env(:control_plus, :api_key), method: Atom.to_string(method)]
     query_with_defaults = Keyword.merge(query, defaults)
-
+    IO.puts "query : #{inspect query_with_defaults}"
     "/cp_api"
     |> get(query: query_with_defaults)
     |> handle_response

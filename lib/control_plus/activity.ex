@@ -15,7 +15,13 @@ defmodule ControlPlus.Activity do
     :start_date,
     :sub_type_id,
     :price,
-    :status
+    :status,
+    :capacity,
+    :description,
+    :description_long,
+    :image,
+    :staff_id
+
   ]
 
   @mapping %{
@@ -24,6 +30,7 @@ defmodule ControlPlus.Activity do
     "startdate" => :start_date,
     "activity_id" => :id,
     "shedule" => :schedule,
+    "ext_description" => :description_long,
   }
 
   @spec parse({String.t, map}) :: {integer, map}
@@ -35,7 +42,7 @@ defmodule ControlPlus.Activity do
         Map.put(client, map_key(key), ControlPlus.Helpers.CastHelper.cast(value))
       end
     )
-    schedule = cast_schedule(activities.schedule)
+    schedule = ControlPlus.Schedule.parse(activities.schedule)
     result = Map.put(activities, :schedule, schedule)
     {ControlPlus.Helpers.CastHelper.cast(id), result}
   end
@@ -43,19 +50,4 @@ defmodule ControlPlus.Activity do
   @spec map_key(String.t) :: atom
   defp map_key(key), do: Map.get(@mapping, key, String.to_atom(key))
 
-  defp cast_schedule(nil), do: nil
-  defp cast_schedule(
-         %{
-           "1" => %{
-             "start" => start_time,
-             "weekday" => weekday
-           }
-         }
-       ) do
-    %{
-      start: ControlPlus.Helpers.CastHelper.cast(start_time),
-      weekday: ControlPlus.Helpers.CastHelper.cast(weekday)
-    }
-  end
-#  defp cast_schedule(schedule), do: schedule
 end

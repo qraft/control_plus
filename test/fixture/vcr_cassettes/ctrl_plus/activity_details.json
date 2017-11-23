@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "ssl_options": {
+          "versions": [
+            "tlsv1.2"
+          ]
+        }
+      },
+      "request_body": "",
+      "url": "https://elitefit.opencontrolplus.com/cp_api?date=2017-11-23&key=558f5b7c12eae18e695fb40e37b0e50130a55201&method=req_activity_group_details"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"error\":\"0\",\"id\":null,\"result\":{\"json_code\":\"2\",\"activities\":{\"5\":{\"start_time\":\"17:45:00\",\"staff_id\":\"\",\"ext_description\":\"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.0 Transitional//EN\\\" \\\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\\\">\\n<html>\\n<head>\\n</head>\\n<body>\\n\\n</body>\\n</html>\",\"activity_id_name\":\"MetCon30\",\"image\":\"/uploads/27/35/85/86/metcon-800x450.jpg\",\"end_time\":\"18:15:00\",\"activity_id\":\"16343\",\"staff_name\":\"\",\"schedule\":{\"1\":{\"start\":\"17:45:00\",\"waitlist_size\":\"0\",\"available\":\"2\"}},\"description\":\"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.0 Transitional//EN\\\" \\\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\\\">\\n<html>\\n<head>\\n</head>\\n<body>\\nLevel 1\\n</body>\\n</html>\",\"capacity\":\"24\"},\"11\":{\"start_time\":\"19:00:00\",\"staff_id\":\"\",\"ext_description\":\"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.0 Transitional//EN\\\" \\\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\\\">\\n<html>\\n<head>\\n</head>\\n<body>\\n\\n</body>\\n</html>\",\"activity_id_name\":\"PowerBuilding Bench\",\"image\":\"/uploads/27/88/24/13/app_bg_bench.jpg\",\"end_time\":\"20:00:00\",\"activity_id\":\"18575\",\"staff_name\":\"\",\"schedule\":{\"1\":{\"start\":\"19:00:00\",\"waitlist_size\":\"0\",\"available\":\"4\"}},\"description\":\"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.0 Transitional//EN\\\" \\\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\\\">\\n<html>\\n<head>\\n</head>\\n<body>\\nlevel 1\\n</body>\\n</html>\",\"capacity\":\"12\"}}}}",
+      "headers": {
+        "Date": "Thu, 23 Nov 2017 04:45:58 GMT",
+        "Server": "Apache/2.2.15 (CentOS)",
+        "Expires": "-1",
+        "Cache-Control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "X-Powered-By": "",
+        "X-Runtime": "0.15173",
+        "Pragma": "no-cache",
+        "P3P": "policyref=\"/w3c/p3p.xml\", CP=\"NON DSP ADM DEV PSD IVDo OUR IND STP PHY PRE NAV UNI OHO:*.opencontrolplus.com\"",
+        "ETag": "\"fe347c8b786a7d357fb7e6bceb5f2a8c\"",
+        "Set-Cookie": "_mysportpages_session_id_=fa435726ba11322440d9c7610ede37df; domain=.opencontrolplus.com; path=/; HttpOnly",
+        "Content-Length": "7604",
+        "Last-Modified": "Thu, 23 Nov 2017 04:29:18 GMT",
+        "Status": "200 OK",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
