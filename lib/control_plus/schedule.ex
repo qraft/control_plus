@@ -3,7 +3,7 @@ defmodule ControlPlus.Schedule do
   A schedule struct, also takes care of converting the json to a struct
   """
 
-  defstruct [:start, :weekday, :waitlist_size, :available]
+  defstruct [:available, :start, :waitlist_size, :weekday]
 
   @mapping %{}
 

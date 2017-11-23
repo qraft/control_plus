@@ -53,7 +53,7 @@ defmodule ControlPlus.Helpers.CastHelper do
   @spec maybe_cast_to_time(any) :: any
   defp maybe_cast_to_time(value) when is_binary(value) do
     case ControlPlus.Helpers.TimeHelper.parse(value) do
-      {:ok, %Time{} = date} -> date
+      {:ok, %Time{} = time} -> time
       _ -> value
     end
   end

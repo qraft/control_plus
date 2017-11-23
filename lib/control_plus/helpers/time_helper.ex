@@ -8,7 +8,7 @@ defmodule ControlPlus.Helpers.TimeHelper do
     "#{time.hour}:#{time.minute}:#{time.second}"
   end
 
-  @spec parse(String.t) :: {:ok, Date.t} | {:error, String.t}
+  @spec parse(String.t) :: {:ok, Time.t} | {:error, String.t}
   def parse(string) when is_binary(string) do
     case Regex.named_captures(~r/^(?<hour>\d{2})\:(?<minute>\d{2})\:(?<second>\d{2})$/, string) do
       %{"hour" => hour, "minute" => minute, "second" => second} -> Time.new(to_i(hour), to_i(minute), to_i(second))

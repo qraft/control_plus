@@ -4,35 +4,40 @@ defmodule ControlPlus.Activity do
   """
 
   defstruct [
-    :id,
-    :name,
-    :count,
-    :start,
-    :date,
-    :end_date,
-    :schedule,
-    :start_date,
-    :sub_type_id,
-    :price,
-    :status,
     :capacity,
+    :count,
+    :date,
     :description,
     :description_long,
+    :end_date,
+    :end_time,
+    :id,
     :image,
-    :staff_id
+    :name,
+    :price,
+    :schedule,
+    :staff_id,
+    :start,
+    :start_date,
+    :start_time,
+    :status,
+    :sub_type_id,
+    :staff_name,
 
   ]
 
   @mapping %{
+    "activity_id" => :id,
     "activity_id_name" => :name,
     "enddate" => :end_date,
-    "startdate" => :start_date,
-    "activity_id" => :id,
-    "shedule" => :schedule,
+    "endtime" => :end_time,
     "ext_description" => :description_long,
+    "shedule" => :schedule,
+    "startdate" => :start_date,
+    "starttime" => :start_time,
   }
 
-  @spec parse({String.t, map}) :: {integer, map}
+  @spec parse({String.t, map}) :: %ControlPlus.Activity{}
   def parse({id, data}) do
     activities = Enum.reduce(
       data,
@@ -43,7 +48,8 @@ defmodule ControlPlus.Activity do
     )
     schedule = ControlPlus.Schedule.parse(activities.schedule)
     result = Map.put(activities, :schedule, schedule)
-    {ControlPlus.Helpers.CastHelper.cast(id), result}
+#    {ControlPlus.Helpers.CastHelper.cast(id), result}
+    result
   end
 
   @spec map_key(String.t) :: atom
