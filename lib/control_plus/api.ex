@@ -95,7 +95,7 @@ defmodule ControlPlus.Api do
              activity_id: activity_id
            ]
          ) do
-      {:ok, data} -> {:ok, ControlPlus.WaitList.parse(data)}
+      {:ok, data} -> remap_wait_list(data)
       error -> error
     end
   end
@@ -135,24 +135,19 @@ defmodule ControlPlus.Api do
 
   @spec remap_activities(map) :: {:ok, map}
   defp remap_activities(data) do
-    result = data["activities"]
-             |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
-
+    result = Enum.into(data["activities"], %{}, &ControlPlus.Activity.parse/1)
     map = Map.put(%{}, :activities, result)
-
     {:ok, map}
   end
 
   @spec remap_schedules(map) :: {:ok, map}
   defp remap_schedules(data) do
-    result = data["shedule"]
-             |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
-
+    result = Enum.into(data["shedule"], %{}, &ControlPlus.Activity.parse/1)
     map = Map.put(%{}, :schedule, result)
-
     {:ok, map}
   end
 
+  @spec remap_reservations(map) :: {:ok, map}
   defp remap_reservations(data) do
     result = data
              |> Map.get("reservations", %{})
@@ -160,4 +155,7 @@ defmodule ControlPlus.Api do
 
     {:ok, %{reservations: result}}
   end
+
+  @spec remap_wait_list(map) :: {:ok, map}
+  defp remap_wait_list(data), do: {:ok, ControlPlus.WaitList.parse(data)}
 end

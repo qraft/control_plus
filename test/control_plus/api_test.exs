@@ -344,4 +344,16 @@ defmodule ControlPlus.ApiTest do
              } == ControlPlus.Api.wait_list(18575, date_time)
     end
   end
+
+  test "it can handle corrupted json" do
+    use_cassette "ctrl_plus/corrupted" do
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.wait_list(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.reservations(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.activity_details()
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.member_visits(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.client_details(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.activities()
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.clients()
+    end
+  end
 end

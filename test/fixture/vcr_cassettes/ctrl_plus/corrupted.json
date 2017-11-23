@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "ssl_options": {
+          "versions": [
+            "tlsv1.2"
+          ]
+        }
+      },
+      "request_body": "",
+      "url": "https://elitefit.opencontrolplus.com/cp_api?params%5Bdate_time%5D=23%2F11%2F2017+19%3A00%3A00&params%5Bactivity_id%5D=18575&key=558f5b7c12eae18e695fb40e37b0e50130a55201&method=get_waitlist"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"error:\"0\",\"id\":null,\"result\":{}}",
+      "headers": {
+        "Date": "Thu, 23 Nov 2017 05:27:58 GMT",
+        "Server": "Apache/2.2.15 (CentOS)",
+        "Expires": "-1",
+        "Cache-Control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "X-Powered-By": "",
+        "X-Runtime": "0.00617",
+        "Pragma": "no-cache",
+        "P3P": "policyref=\"/w3c/p3p.xml\", CP=\"NON DSP ADM DEV PSD IVDo OUR IND STP PHY PRE NAV UNI OHO:*.opencontrolplus.com\"",
+        "ETag": "\"e63d5fce633acb1ee711de908a93b910\"",
+        "Set-Cookie": "_mysportpages_session_id_=5c737d193572c9034ae93c217f05d922; domain=.opencontrolplus.com; path=/; HttpOnly",
+        "Content-Length": "109",
+        "Last-Modified": "Thu, 23 Nov 2017 05:11:18 GMT",
+        "Status": "200 OK",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
