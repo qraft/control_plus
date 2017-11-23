@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "ssl_options": {
+          "versions": [
+            "tlsv1.2"
+          ]
+        }
+      },
+      "request_body": "",
+      "url": "https://elitefit.opencontrolplus.com/cp_api?params%5Baddress%5D=Somestreet+1&params%5Bbank_account%5D=NL08INGB0123456789&params%5Bbirthday%5D=24%2F06%2F1981&params%5Bcity%5D=Utrecht&params%5Bcomment%5D=Afvallers+%2Fniet+geselecteerd%2F+in+de+toekomst+contacten&params%5Bcountry_id%5D=159&params%5Bemail%5D=jane%40doe.com&params%5Binterjection%5D=12345&params%5Blastname%5D=Doe&params%5Bmob_phone%5D=0612345678&params%5Bname%5D=Jane&params%5Bpassword%5D=test123&params%5Bsex%5D=F&params%5Bzipcode%5D=1111AB&key=558f5b7c12eae18e695fb40e37b0e50130a55201&method=req_add_new_prospect"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"error\":\"0\",\"id\":null,\"result\":{\"username\":\"jane@doe.com\",\"client_number\":\"904\",\"json_code\":\"29\",\"client_id\":\"1282833\",\"password\":\"test123\"}}",
+      "headers": {
+        "Date": "Thu, 23 Nov 2017 14:26:22 GMT",
+        "Server": "Apache/2.2.15 (CentOS)",
+        "Expires": "-1",
+        "Cache-Control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "X-Powered-By": "",
+        "X-Runtime": "0.43930",
+        "Pragma": "no-cache",
+        "P3P": "policyref=\"/w3c/p3p.xml\", CP=\"NON DSP ADM DEV PSD IVDo OUR IND STP PHY PRE NAV UNI OHO:*.opencontrolplus.com\"",
+        "ETag": "\"e2d55b0c8516b6d4c05b95a389250ca4\"",
+        "Set-Cookie": "_mysportpages_session_id_=3396d7c1a2a21f0b05014223aa47ca8f; domain=.opencontrolplus.com; path=/; HttpOnly",
+        "Content-Length": "142",
+        "Last-Modified": "Thu, 23 Nov 2017 14:09:42 GMT",
+        "Status": "200 OK",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

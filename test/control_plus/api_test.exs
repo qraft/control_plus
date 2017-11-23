@@ -427,4 +427,35 @@ defmodule ControlPlus.ApiTest do
       assert {:error, {:invalid, "0", 9}} == ControlPlus.paginated_clients()
     end
   end
+
+  test "it can create a client" do
+    use_cassette "ctrl_plus/create_client" do
+      client = %ControlPlus.Client{
+        address: "Somestreet 1",
+        bank_account: "NL08INGB0123456789",
+        birthday: ~D[1981-06-24],
+        city: "Utrecht",
+        comment: "Afvallers /niet geselecteerd/ in de toekomst contacten",
+        country: "Netherlands",
+        email: "jane@doe.com",
+        interjection: 12345,
+        lastname: "Doe",
+        mobile_phone: "0612345678",
+        name: "Jane",
+        password: "test123",
+        sex: "F",
+        zipcode: "1111AB",
+      }
+      assert  {
+                :ok,
+                %{
+                  client_id: 1282833,
+                  client_number: 904,
+                  json_code: 29,
+                  password: "test123",
+                  username: "jane@doe.com"
+                }
+              } == ControlPlus.Api.create_client(client)
+    end
+  end
 end

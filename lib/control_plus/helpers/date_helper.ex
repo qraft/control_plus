@@ -8,6 +8,11 @@ defmodule ControlPlus.Helpers.DateHelper do
     Timex.format!(date, "{YYYY}-{0M}-{0D}")
   end
 
+  @spec format_date_for_api(Date.t) :: String.t
+  def format_date_for_api(date) do
+    Timex.format!(date, "{0D}/{0M}/{YYYY}")
+  end
+
   @spec format_date_days_ago(non_neg_integer) :: String.t
   def format_date_days_ago(days) do
     Timex.today

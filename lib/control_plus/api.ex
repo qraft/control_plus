@@ -103,6 +103,12 @@ defmodule ControlPlus.Api do
   end
 
 
+  def create_client(%ControlPlus.Client{} = client) do
+    case ControlPlus.ApiClient.fetch(:req_add_new_prospect, params: ControlPlus.Client.to_post_params(client)) do
+      {:ok, result} -> {:ok, ControlPlus.Helpers.CastHelper.string_map_to_casted_atom(result)}
+    end
+  end
+
   @spec remap_users(map) :: {:ok, map}
   defp remap_users(data) do
     map = %{}
