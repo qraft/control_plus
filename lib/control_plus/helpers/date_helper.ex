@@ -22,6 +22,11 @@ defmodule ControlPlus.Helpers.DateHelper do
     |> format_date
   end
 
+  @spec format_date_time(DateTime.t) :: String.t
+  def format_date_time(%DateTime{} = dt) do
+    Timex.format!(dt, "%d/%m/%Y %H:%M:%S", :strftime)
+  end
+
   @spec parse(String.t) :: {:ok, Date.t} | {:error, String.t}
   def parse(string) do
     case machine_notation(string) do

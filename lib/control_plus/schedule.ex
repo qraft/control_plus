@@ -3,7 +3,6 @@ defmodule ControlPlus.Schedule do
   A schedule struct, also takes care of converting the json to a struct
   """
 
-  #TODO cast end_date and start_date to actual Date objects
   defstruct [:start, :weekday, :waitlist_size, :available]
 
   @mapping %{}

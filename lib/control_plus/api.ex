@@ -44,7 +44,14 @@ defmodule ControlPlus.Api do
   def member_visits(client_id, from \\ nil, to \\ nil) do
     to = to || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
     from = from || ControlPlus.Helpers.DateHelper.format_date_days_ago(365)
-    case fetch(:req_current_reservations, params: [client_id: client_id, start_date: from, end_date: to]) do
+    case fetch(
+           :req_current_reservations,
+           params: [
+             client_id: client_id,
+             start_date: from,
+             end_date: to
+           ]
+         ) do
       {:ok, data} -> remap_activities(data)
       error -> error
     end
@@ -59,21 +66,45 @@ defmodule ControlPlus.Api do
     end
   end
 
-  @spec reservations(Date.t, non_neg_integer) :: {:ok | map} | {:error, any}
-  def reservations(date_time, activity_id) do
-    fetch(:get_reservations, date_time: date_time, activity_id: activity_id)
+  @spec reservations(non_neg_integer, Date.t | nil) :: {:ok | map} | {:error, any}
+  def reservations(activity_id, date_time \\ nil) do
+
+    date_time = date_time || DateTime.utc_now
+    formatted_date_time = ControlPlus.Helpers.DateHelper.format_date_time(date_time)
+    case fetch(
+           :get_reservations,
+           params: [
+             date_time: formatted_date_time,
+             activity_id: activity_id
+           ]
+         ) do
+      {:ok, data} -> remap_reservations(data)
+      error -> error
+    end
   end
 
-  @spec waitlist(DateTime.t, non_neg_integer) :: {:ok | map} | {:error, any}
-  def waitlist(date_time, activity_id) do
-    fetch(:get_waitlist, date_time: date_time, activity_id: activity_id)
+  @spec wait_list(non_neg_integer, Date.t | nil) :: {:ok | map} | {:error, any}
+  def wait_list(activity_id, date_time \\ nil) do
+
+    date_time = date_time || DateTime.utc_now
+    formatted_date_time = ControlPlus.Helpers.DateHelper.format_date_time(date_time)
+    case fetch(
+           :get_waitlist,
+           params: [
+             date_time: formatted_date_time,
+             activity_id: activity_id
+           ]
+         ) do
+      {:ok, data} -> {:ok, ControlPlus.WaitList.parse(data)}
+      error -> error
+    end
   end
 
   @spec fetch(atom, list) :: {:ok, map} | {:error, any}
   defp fetch(method, query) do
     defaults = [key: Application.get_env(:control_plus, :api_key), method: Atom.to_string(method)]
     query_with_defaults = Keyword.merge(query, defaults)
-    IO.puts "query : #{inspect query_with_defaults}"
+
     "/cp_api"
     |> get(query: query_with_defaults)
     |> handle_response
@@ -104,7 +135,8 @@ defmodule ControlPlus.Api do
 
   @spec remap_activities(map) :: {:ok, map}
   defp remap_activities(data) do
-    result = data["activities"] |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
+    result = data["activities"]
+             |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
 
     map = Map.put(%{}, :activities, result)
 
@@ -113,10 +145,19 @@ defmodule ControlPlus.Api do
 
   @spec remap_schedules(map) :: {:ok, map}
   defp remap_schedules(data) do
-    result = data["shedule"] |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
+    result = data["shedule"]
+             |> Enum.into(%{}, &ControlPlus.Activity.parse/1)
 
     map = Map.put(%{}, :schedule, result)
 
     {:ok, map}
+  end
+
+  defp remap_reservations(data) do
+    result = data
+             |> Map.get("reservations", %{})
+             |> Enum.map(&ControlPlus.Reservation.parse/1)
+
+    {:ok, %{reservations: result}}
   end
 end

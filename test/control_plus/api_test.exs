@@ -309,4 +309,39 @@ defmodule ControlPlus.ApiTest do
              } == ControlPlus.Api.activity_details()
     end
   end
+
+  test "it can get reservations" do
+    use_cassette "ctrl_plus/get_reservations" do
+      date_time = DateTime.from_naive!(~N[2017-11-23 19:00:00.000], "Etc/UTC")
+
+      assert {
+               :ok,
+               %{
+                 reservations: [%ControlPlus.Reservation{id: 2758360, user_id: 1251776},
+                   %ControlPlus.Reservation{id: 2759008, user_id: 1247568},
+                   %ControlPlus.Reservation{id: 2759608, user_id: 1215297},
+                   %ControlPlus.Reservation{id: 2761606, user_id: 1243171},
+                   %ControlPlus.Reservation{id: 2762629, user_id: 1239420},
+                   %ControlPlus.Reservation{id: 2763348, user_id: 1245300},
+                   %ControlPlus.Reservation{id: 2767447, user_id: 1211655},
+                   %ControlPlus.Reservation{id: 2768876, user_id: 1233832}]
+               }
+             } == ControlPlus.Api.reservations(18575, date_time)
+    end
+  end
+
+  test "it can get a waitlist" do
+    use_cassette "ctrl_plus/wait_list" do
+      date_time = DateTime.from_naive!(~N[2017-11-23 19:00:00.000], "Etc/UTC")
+
+      assert {
+               :ok,
+               %ControlPlus.WaitList{
+                 activity_title: "PowerBuilding Bench",
+                 end_time: ~T[20:00:00],
+                 waitlist: %{}
+               }
+             } == ControlPlus.Api.wait_list(18575, date_time)
+    end
+  end
 end
