@@ -3,7 +3,6 @@ defmodule ControlPlus.Activity do
   An Activity struct, also takes care of converting the json to a struct
   """
 
-  #TODO cast end_date and start_date to actual Date objects
   defstruct [
     :id,
     :name,
@@ -49,5 +48,4 @@ defmodule ControlPlus.Activity do
 
   @spec map_key(String.t) :: atom
   defp map_key(key), do: Map.get(@mapping, key, String.to_atom(key))
-
 end

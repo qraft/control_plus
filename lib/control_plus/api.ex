@@ -17,9 +17,8 @@ defmodule ControlPlus.Api do
         client_id: client_id
       ]
     )
-
     case result do
-      {:ok, data} -> {:ok, ControlPlus.User.parse({client_id, data})}
+      {:ok, data} -> {:ok, ControlPlus.Client.parse({client_id, data})}
       error -> error
     end
   end
@@ -126,7 +125,7 @@ defmodule ControlPlus.Api do
   @spec remap_users(map) :: {:ok, map}
   defp remap_users(data) do
     map = %{}
-          |> Map.put(:users, Enum.map(data["users"], &ControlPlus.User.parse/1))
+          |> Map.put(:users, Enum.map(data["users"], &ControlPlus.Client.parse/1))
           |> Map.put(:total_pages, String.to_integer(data["total_pages"]))
           |> Map.put(:current_page, String.to_integer(data["current_page"]))
 

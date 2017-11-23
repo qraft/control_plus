@@ -16,7 +16,7 @@ defmodule ControlPlus.ApiTest do
                  current_page: 1,
                  total_pages: 31,
                  users: [
-                   %ControlPlus.User{
+                   %ControlPlus.Client{
                      address: "Somewhere 123",
                      birthday: ~D[1984-06-09],
                      brought_by: nil,
@@ -43,7 +43,7 @@ defmodule ControlPlus.ApiTest do
                      updated_at: "2017-08-03 13:24:04",
                      zipcode: "2211GB"
                    },
-                   %ControlPlus.User{
+                   %ControlPlus.Client{
                      address: "Somestreet 1",
                      birthday: ~D[1967-07-27],
                      brought_by: nil,
@@ -97,7 +97,7 @@ defmodule ControlPlus.ApiTest do
                  members_phone: nil,
                  birthday: ~D[1981-06-24],
                  address: nil,
-                 __struct__: ControlPlus.User,
+                 __struct__: ControlPlus.Client,
                  members_lastname: "Doe",
                  json_code: 14,
                  members_city: "Utrecht",

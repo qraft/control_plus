@@ -1,4 +1,4 @@
-defmodule ControlPlus.User do
+defmodule ControlPlus.Client do
   @moduledoc """
   A User struct, also takes care of converting the json to a struct
   """
@@ -35,7 +35,7 @@ defmodule ControlPlus.User do
   def parse({id, data}) do
     data
     |> Enum.reduce(
-         %ControlPlus.User{},
+         %ControlPlus.Client{},
          fn ({key, value}, client) ->
            Map.put(client, String.to_atom(key), ControlPlus.Helpers.CastHelper.cast(value))
          end

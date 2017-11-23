@@ -58,7 +58,6 @@ defmodule ControlPlus.Helpers.DateHelper do
     case Regex.named_captures(~r/^(?<day>\d{2})[-|\/](?<month>\d{2})[-|\/](?<year>\d{4})$/, string) do
       %{"day" => day, "month" => month, "year" => year} -> Date.new(to_i(year), to_i(month), to_i(day))
       _ -> {:error, "could not parse #{string}"}
-
     end
   end
 end
