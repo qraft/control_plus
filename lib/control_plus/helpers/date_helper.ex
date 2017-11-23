@@ -41,8 +41,10 @@ defmodule ControlPlus.Helpers.DateHelper do
     date
   end
 
+  @spec to_i(String.t) :: number
   defp to_i(binary), do: String.to_integer(binary)
 
+  @spec machine_notation(String.t) :: {:ok, Date.t} | {:error, String.t}
   defp machine_notation(string) do
     case Regex.named_captures(~r/^(?<year>\d{4})[-|\/](?<month>\d{2})[-|\/](?<day>\d{2})$/, string) do
       %{"day" => day, "month" => month, "year" => year} -> Date.new(to_i(year), to_i(month), to_i(day))
@@ -51,6 +53,7 @@ defmodule ControlPlus.Helpers.DateHelper do
     end
   end
 
+  @spec human_notation(String.t) :: {:ok, Date.t} | {:error, String.t}
   defp human_notation(string) do
     case Regex.named_captures(~r/^(?<day>\d{2})[-|\/](?<month>\d{2})[-|\/](?<year>\d{4})$/, string) do
       %{"day" => day, "month" => month, "year" => year} -> Date.new(to_i(year), to_i(month), to_i(day))

@@ -5,7 +5,7 @@ defmodule ControlPlus.Reservation do
 
   defstruct [:id, :user_id]
 
-  @spec parse(map) :: map
+  @spec parse(nil | {any, map}) :: nil | map
   def parse(nil), do: nil
   def parse({_, data}) do
     Enum.reduce(
