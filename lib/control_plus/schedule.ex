@@ -9,6 +9,7 @@ defmodule ControlPlus.Schedule do
 
   @spec parse(map) :: map
   def parse(nil), do: nil
+  def parse(%{} = schedule) when schedule == %{}, do: nil
   def parse(%{"1" => data}) do
     Enum.reduce(
       data,

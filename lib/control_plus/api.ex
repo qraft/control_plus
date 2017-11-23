@@ -1,17 +1,12 @@
 defmodule ControlPlus.Api do
   @moduledoc """
-  This module wraps the API endpoint of Control Plus.
+  This module wraps the API of Control Plus.
   """
 
-  use Tesla
-
-  adapter :hackney, [ssl_options: [{:versions, [:'tlsv1.2']}]]
-  plug Tesla.Middleware.BaseUrl,
-       "https://#{Application.get_env(:control_plus, :client_name)}.opencontrolplus.com"
-
+  @doc "Returns all the details of a client"
   @spec client_details(non_neg_integer) :: {:ok, %ControlPlus.Client{}} | {:error, any}
   def client_details(client_id) do
-    result = fetch(
+    result = ControlPlus.ApiClient.fetch(
       :client_detail,
       params: [
         client_id: client_id
@@ -23,29 +18,32 @@ defmodule ControlPlus.Api do
     end
   end
 
+  @doc "Returns a paginated list of clients"
   @spec paginated_clients(non_neg_integer | nil, non_neg_integer | nil) ::
           {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
           {:error, any}
   def paginated_clients(page \\ 1, _limit \\ 30) do
-    case fetch(:clients_list, page: page, limit: 1000) do
+    case ControlPlus.ApiClient.fetch(:clients_list, page: page, limit: 1000) do
       {:ok, data} -> remap_users(data)
       error -> error
     end
   end
 
+  @doc "Returns a list of activities"
   @spec activities :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def activities do
-    case fetch(:req_act_shedule, sub_type_id: "") do
+    case ControlPlus.ApiClient.fetch(:req_act_shedule, sub_type_id: "") do
       {:ok, data} -> remap_schedules(data)
       error -> error
     end
   end
 
-  @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil) :: {:ok , [%ControlPlus.Activity{}]} | {:error, any}
+  @doc "returns a list of activities for a member. when no from and to are given, it defaults to the last year."
+  @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def member_visits(client_id, from \\ nil, to \\ nil) do
     to = to || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
     from = from || ControlPlus.Helpers.DateHelper.format_date_days_ago(365)
-    case fetch(
+    case ControlPlus.ApiClient.fetch(
            :req_current_reservations,
            params: [
              client_id: client_id,
@@ -58,21 +56,23 @@ defmodule ControlPlus.Api do
     end
   end
 
+  @doc "returns a list of activity details for a given date, or otherwise today"
   @spec activity_details(Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def activity_details(date \\ nil) do
     date = date || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
-    case fetch(:req_activity_group_details, date: date) do
+    case ControlPlus.ApiClient.fetch(:req_activity_group_details, date: date) do
       {:ok, data} -> remap_activities(data)
       error -> error
     end
   end
 
+  @doc "returns reservations for a given activity and date, if no date given it uses today"
   @spec reservations(non_neg_integer, Date.t | nil) :: {:ok, [%ControlPlus.Reservation{}]} | {:error, any}
   def reservations(activity_id, date_time \\ nil) do
 
     date_time = date_time || DateTime.utc_now
     formatted_date_time = ControlPlus.Helpers.DateHelper.format_date_time(date_time)
-    case fetch(
+    case ControlPlus.ApiClient.fetch(
            :get_reservations,
            params: [
              date_time: formatted_date_time,
@@ -84,12 +84,13 @@ defmodule ControlPlus.Api do
     end
   end
 
+  @doc "returns a waiting list for a given activity and date, if no date given it uses today"
   @spec wait_list(non_neg_integer, Date.t | nil) :: {:ok, %ControlPlus.WaitList{}} | {:error, any}
   def wait_list(activity_id, date_time \\ nil) do
 
     date_time = date_time || DateTime.utc_now
     formatted_date_time = ControlPlus.Helpers.DateHelper.format_date_time(date_time)
-    case fetch(
+    case ControlPlus.ApiClient.fetch(
            :get_waitlist,
            params: [
              date_time: formatted_date_time,
@@ -101,28 +102,6 @@ defmodule ControlPlus.Api do
     end
   end
 
-  @spec fetch(atom, list) :: {:ok, map} | {:error, any}
-  defp fetch(method, query) do
-    defaults = [key: Application.get_env(:control_plus, :api_key), method: Atom.to_string(method)]
-    query_with_defaults = Keyword.merge(query, defaults)
-
-    "/cp_api"
-    |> get(query: query_with_defaults)
-    |> handle_response
-  end
-
-  @spec handle_response(map) :: {:ok, map} | {:error, any}
-  defp handle_response(%{status: 200, body: json}) do
-    json
-    |> Poison.decode
-    |> handle_json
-  end
-  defp handle_response(%{status: status}), do: {:error, status}
-
-  @spec handle_json({:ok, map} | {:error, any}) :: {:ok, map} | {:error, any}
-  defp handle_json({:ok, %{"error" => "0", "result" => data}}), do: {:ok, data}
-  defp handle_json({:ok, %{"error" => error_code}}), do: {:error, error_code}
-  defp handle_json(error), do: error
 
   @spec remap_users(map) :: {:ok, map}
   defp remap_users(data) do

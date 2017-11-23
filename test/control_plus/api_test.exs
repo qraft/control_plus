@@ -72,7 +72,7 @@ defmodule ControlPlus.ApiTest do
                    }
                  ]
                }
-             } == ControlPlus.Api.paginated_clients()
+             } == ControlPlus.paginated_clients()
     end
   end
 
@@ -110,7 +110,7 @@ defmodule ControlPlus.ApiTest do
                  updated_at: nil,
                  zipcode: "1111AB"
                }
-             } = ControlPlus.Api.client_details(1017831)
+             } = ControlPlus.client_details(1017831)
     end
   end
 
@@ -241,7 +241,7 @@ defmodule ControlPlus.ApiTest do
                    }
                  }
                ]
-             } == ControlPlus.Api.activities()
+             } == ControlPlus.activities()
     end
   end
 
@@ -279,7 +279,7 @@ defmodule ControlPlus.ApiTest do
           }
         ]
 
-      } = ControlPlus.Api.member_visits(1016503)
+      } = ControlPlus.member_visits(1016503)
     end
   end
 
@@ -377,7 +377,7 @@ defmodule ControlPlus.ApiTest do
                    }
                  }
                ]
-             } == ControlPlus.Api.activity_details()
+             } == ControlPlus.activity_details()
     end
   end
 
@@ -397,7 +397,7 @@ defmodule ControlPlus.ApiTest do
                  %ControlPlus.Reservation{id: 2767447, user_id: 1211655},
                  %ControlPlus.Reservation{id: 2768876, user_id: 1233832}
                ]
-             } == ControlPlus.Api.reservations(18575, date_time)
+             } == ControlPlus.reservations(18575, date_time)
     end
   end
 
@@ -412,19 +412,19 @@ defmodule ControlPlus.ApiTest do
                  end_time: ~T[20:00:00],
                  waitlist: %{}
                }
-             } == ControlPlus.Api.wait_list(18575, date_time)
+             } == ControlPlus.wait_list(18575, date_time)
     end
   end
 
   test "it can handle corrupted json" do
     use_cassette "ctrl_plus/corrupted" do
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.wait_list(-1)
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.reservations(-1)
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.activity_details()
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.member_visits(-1)
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.client_details(-1)
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.activities()
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.Api.paginated_clients()
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.wait_list(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.reservations(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.activity_details()
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.member_visits(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.client_details(-1)
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.activities()
+      assert {:error, {:invalid, "0", 9}} == ControlPlus.paginated_clients()
     end
   end
 end
