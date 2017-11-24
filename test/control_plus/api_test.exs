@@ -9,7 +9,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "should get a list of clients" do
-    use_cassette "ctrl_plus/get_clients" do
+    use_cassette "get_clients" do
       assert {
                :ok,
                %{
@@ -77,7 +77,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "should get client details " do
-    use_cassette "ctrl_plus/client_details" do
+    use_cassette "client_details" do
       assert {
                :ok,
                %ControlPlus.Client{
@@ -115,7 +115,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "should get a list of activities" do
-    use_cassette "ctrl_plus/get_activities" do
+    use_cassette "get_activities" do
       assert {
                :ok,
                [
@@ -246,7 +246,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "member_visits_for_sync" do
-    use_cassette "ctrl_plus/member_visits" do
+    use_cassette "member_visits" do
       {
         :ok,
 
@@ -284,7 +284,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "activity details" do
-    use_cassette "ctrl_plus/activity_details" do
+    use_cassette "activity_details" do
       assert {
                :ok,
                [
@@ -382,7 +382,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "it can get reservations" do
-    use_cassette "ctrl_plus/get_reservations" do
+    use_cassette "get_reservations" do
       date_time = DateTime.from_naive!(~N[2017-11-23 19:00:00.000], "Etc/UTC")
 
       assert {
@@ -402,7 +402,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "it can get a waitlist" do
-    use_cassette "ctrl_plus/wait_list" do
+    use_cassette "wait_list" do
       date_time = DateTime.from_naive!(~N[2017-11-23 19:00:00.000], "Etc/UTC")
 
       assert {
@@ -417,7 +417,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "it can handle corrupted json" do
-    use_cassette "ctrl_plus/corrupted" do
+    use_cassette "corrupted" do
       assert {:error, {:invalid, "0", 9}} == ControlPlus.wait_list(-1)
       assert {:error, {:invalid, "0", 9}} == ControlPlus.reservations(-1)
       assert {:error, {:invalid, "0", 9}} == ControlPlus.activity_details()
@@ -429,7 +429,7 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "it can create a client" do
-    use_cassette "ctrl_plus/create_client" do
+    use_cassette "create_client" do
       client = %ControlPlus.Client{
         address: "Somestreet 1",
         bank_account: "NL08INGB0123456789",
