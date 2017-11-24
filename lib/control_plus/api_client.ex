@@ -32,6 +32,7 @@ defmodule ControlPlus.ApiClient do
 
   @spec handle_json({:ok, map} | {:error, any}) :: {:ok, map} | {:error, any}
   defp handle_json({:ok, %{"error" => "0", "result" => data}}), do: {:ok, data}
+  defp handle_json({:ok, %{"error" => error_code, "error_message" => message}}), do: {:error, message}
   defp handle_json({:ok, %{"error" => error_code}}), do: {:error, error_code}
   defp handle_json(error), do: error
 end

@@ -13,8 +13,12 @@ defmodule ControlPlus.Helpers.DateHelper do
     Timex.format!(date, "{0D}/{0M}/{YYYY}")
   end
 
-  @spec format_date_time_for_api(DateTime.t) :: String.t
-  def format_date_time_for_api(date_time) do
+  @spec format_date_time_for_api(DateTime.t, :reversed | nil) :: String.t
+  def format_date_time_for_api(date_time, option \\ nil)
+  def format_date_time_for_api(date_time, :reversed) do
+    Timex.format!(date_time, "%Y/%m/%d %H:%M:%S", :strftime)
+  end
+  def format_date_time_for_api(date_time, _) do
     Timex.format!(date_time, "%d/%m/%Y %H:%M:%S", :strftime)
   end
 

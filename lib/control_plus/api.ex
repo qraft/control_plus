@@ -118,10 +118,6 @@ defmodule ControlPlus.Api do
         date_time: ControlPlus.Helpers.DateHelper.format_date_time_for_api(date_time)
       ]
     )
-    case result do
-      {:ok, result} -> result
-      error -> error
-    end
   end
 
   def cancel_reservation(client_id, activity_id, date_time) do
@@ -130,13 +126,9 @@ defmodule ControlPlus.Api do
       params: [
         client_id: client_id,
         activity_id: activity_id,
-        date_time: ControlPlus.Helpers.DateHelper.format_date_time_for_api(date_time)
+        date_time: ControlPlus.Helpers.DateHelper.format_date_time_for_api(date_time, :reversed)
       ]
     )
-    case result do
-      {:ok, result} -> result
-      error -> error
-    end
   end
 
   @spec remap_users(map) :: {:ok, map}
