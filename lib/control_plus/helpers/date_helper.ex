@@ -13,6 +13,11 @@ defmodule ControlPlus.Helpers.DateHelper do
     Timex.format!(date, "{0D}/{0M}/{YYYY}")
   end
 
+  @spec format_date_time_for_api(DateTime.t) :: String.t
+  def format_date_time_for_api(date_time) do
+    Timex.format!(date_time, "%d/%m/%Y %H:%M:%S", :strftime)
+  end
+
   @spec format_date_days_ago(non_neg_integer) :: String.t
   def format_date_days_ago(days) do
     Timex.today

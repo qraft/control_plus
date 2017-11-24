@@ -458,4 +458,20 @@ defmodule ControlPlus.ApiTest do
               } == ControlPlus.Api.create_client(client)
     end
   end
+
+  #FIXME this test should not return error 3!
+  test "it can make a reservation" do
+    use_cassette "make_reservation" do
+      date_time = DateTime.from_naive!(~N[2019-03-17 10:01:00.000], "Etc/UTC")
+      assert {:error, "3"} == ControlPlus.Api.make_reservation(996388, 16939, date_time)
+    end
+  end
+
+  #FIXME this test should not return error 3!
+  test "it can cancel a reservation" do
+    date_time = DateTime.from_naive!(~N[2019-03-17 10:01:00.000], "Etc/UTC")
+    use_cassette "make_reservation" do
+      assert {:error, "3"} == ControlPlus.Api.cancel_reservation(996388, 16939, date_time)
+    end
+  end
 end

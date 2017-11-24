@@ -109,6 +109,36 @@ defmodule ControlPlus.Api do
     end
   end
 
+  def make_reservation(client_id, activity_id, date_time) do
+    result = ControlPlus.ApiClient.fetch(
+      :req_reservation,
+      params: [
+        client_id: client_id,
+        activity_id: activity_id,
+        date_time: ControlPlus.Helpers.DateHelper.format_date_time_for_api(date_time)
+      ]
+    )
+    case result do
+      {:ok, result} -> result
+      error -> error
+    end
+  end
+
+  def cancel_reservation(client_id, activity_id, date_time) do
+    result = ControlPlus.ApiClient.fetch(
+      :req_cancel,
+      params: [
+        client_id: client_id,
+        activity_id: activity_id,
+        date_time: ControlPlus.Helpers.DateHelper.format_date_time_for_api(date_time)
+      ]
+    )
+    case result do
+      {:ok, result} -> result
+      error -> error
+    end
+  end
+
   @spec remap_users(map) :: {:ok, map}
   defp remap_users(data) do
     map = %{}
