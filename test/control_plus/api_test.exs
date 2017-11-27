@@ -76,6 +76,13 @@ defmodule ControlPlus.ApiTest do
     end
   end
 
+
+  test "should get page 2 from the list of clients" do
+    use_cassette "get_clients_page2" do
+      assert {:ok, %{current_page: 2}} = ControlPlus.paginated_clients(page: 2)
+    end
+  end
+
   test "should get client details " do
     use_cassette "client_details" do
       assert {

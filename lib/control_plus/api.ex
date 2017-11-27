@@ -19,11 +19,11 @@ defmodule ControlPlus.Api do
   end
 
   @doc "Returns a paginated list of clients"
-  @spec paginated_clients(non_neg_integer | nil, non_neg_integer | nil) ::
+  @spec paginated_clients(keyword) ::
           {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
           {:error, any}
-  def paginated_clients(page \\ 1, _limit \\ 30) do
-    case ControlPlus.ApiClient.fetch(:clients_list, page: page, limit: 1000) do
+  def paginated_clients(options \\ [page: 1, limit: 30]) do
+    case ControlPlus.ApiClient.fetch(:clients_list, params: [page: options[:page], limit: options[:limit]]) do
       {:ok, data} -> remap_users(data)
       error -> error
     end
