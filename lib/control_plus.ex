@@ -10,4 +10,7 @@ defmodule ControlPlus do
   defdelegate activity_details(date \\ nil), to: ControlPlus.Api
   defdelegate wait_list(activity_id, date_time \\ nil), to: ControlPlus.Api
   defdelegate reservations(activity_id, date_time \\ nil), to: ControlPlus.Api
+  defdelegate cancel_reservation(client_id, activity_id, date_time), to: ControlPlus.Api
+  defdelegate make_reservation(client_id, activity_id, date_time), to: ControlPlus.Api
+  defdelegate create_client(client), to: ControlPlus.Api
 end

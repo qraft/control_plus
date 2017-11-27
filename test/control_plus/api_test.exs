@@ -455,35 +455,35 @@ defmodule ControlPlus.ApiTest do
                   password: "test123",
                   username: "jane@doe.com"
                 }
-              } == ControlPlus.Api.create_client(client)
+              } == ControlPlus.create_client(client)
     end
   end
 
   test "it can handle a reservation" do
     use_cassette "make_reservation" do
       date_time = DateTime.from_naive!(~N[2017-12-07 17:30:00.000], "Etc/UTC")
-      assert {:ok, %{"json_code" => "4"}} == ControlPlus.Api.make_reservation(996388, 18847, date_time)
+      assert {:ok, %{"json_code" => "4"}} == ControlPlus.make_reservation(996388, 18847, date_time)
     end
   end
 
   test "it can handle a reservation failure" do
     use_cassette "make_reservation failure" do
       date_time = DateTime.from_naive!(~N[2018-02-08 17:30:00.000], "Etc/UTC")
-      assert {:error, "No membership linked"} == ControlPlus.Api.make_reservation(996388, 18847, date_time)
+      assert {:error, "No membership linked"} == ControlPlus.make_reservation(996388, 18847, date_time)
     end
   end
 
   test "it can a cancel reservation" do
     date_time = DateTime.from_naive!(~N[2017-12-07 17:30:00.000], "Etc/UTC")
     use_cassette "cancel_reservation" do
-      assert {:ok, %{"json_code" => "4"}} == ControlPlus.Api.cancel_reservation(996388, 18847, date_time)
+      assert {:ok, %{"json_code" => "4"}} == ControlPlus.cancel_reservation(996388, 18847, date_time)
     end
   end
 
   test "it can handle a cancel reservation failure" do
     date_time = DateTime.from_naive!(~N[2018-02-08 17:30:00.000], "Etc/UTC")
     use_cassette "cancel_reservation_failure" do
-      assert {:error, "Reservation not available"} == ControlPlus.Api.cancel_reservation(996388, 18847, date_time)
+      assert {:error, "Reservation not available"} == ControlPlus.cancel_reservation(996388, 18847, date_time)
     end
   end
 end
