@@ -6,7 +6,7 @@ defmodule ControlPlus do
   defdelegate activities(), to: ControlPlus.Api
   defdelegate client_details(id), to: ControlPlus.Api
   defdelegate member_visits(client_id, from \\ nil, to \\ nil), to: ControlPlus.Api
-  defdelegate paginated_clients(options), to: ControlPlus.Api
+  defdelegate paginated_clients(options \\ nil), to: ControlPlus.Api
   defdelegate activity_details(date \\ nil), to: ControlPlus.Api
   defdelegate wait_list(activity_id, date_time \\ nil), to: ControlPlus.Api
   defdelegate reservations(activity_id, date_time \\ nil), to: ControlPlus.Api

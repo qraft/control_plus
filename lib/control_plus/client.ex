@@ -6,7 +6,7 @@ defmodule ControlPlus.Client do
   defstruct [
     :address,
     :bank_account,
-    :birthday,
+    :birthdate,
     :brought_by,
     :campaign,
     :city,
@@ -16,7 +16,7 @@ defmodule ControlPlus.Client do
     :country,
     :email,
     :entered,
-    :id,
+    :ext_id,
     :interjection,
     :json_code,
     :labels,
@@ -36,6 +36,8 @@ defmodule ControlPlus.Client do
   ]
 
   @mapping %{
+    "id" => :ext_id,
+    "birthday" => :birthdate,
     "members_address" => :address,
     "members_city" => :city,
     "members_email" => :email,
@@ -60,7 +62,7 @@ defmodule ControlPlus.Client do
            Map.put(client, map_key(key), ControlPlus.Helpers.CastHelper.cast(value))
          end
        )
-    |> Map.put(:id, ControlPlus.Helpers.CastHelper.cast(id))
+    |> Map.put(:ext_id, ControlPlus.Helpers.CastHelper.cast(id))
   end
 
   @doc "Takes a %ControlPlus.Client{} struct and transforms that to a map which is accepted by the api to post"

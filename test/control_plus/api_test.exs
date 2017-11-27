@@ -18,7 +18,7 @@ defmodule ControlPlus.ApiTest do
                  clients: [
                    %ControlPlus.Client{
                      address: "Somewhere 123",
-                     birthday: ~D[1984-06-09],
+                     birthdate: ~D[1984-06-09],
                      brought_by: nil,
                      campaign: nil,
                      city: "Den Haag",
@@ -27,7 +27,7 @@ defmodule ControlPlus.ApiTest do
                      country: "Netherlands",
                      email: "test@user.com",
                      entered: "Web-in",
-                     id: 1014557,
+                     ext_id: 1014557,
                      interjection: nil,
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser2",
@@ -45,7 +45,7 @@ defmodule ControlPlus.ApiTest do
                    },
                    %ControlPlus.Client{
                      address: "Somestreet 1",
-                     birthday: ~D[1967-07-27],
+                     birthdate: ~D[1967-07-27],
                      brought_by: nil,
                      campaign: nil,
                      city: "Amsterdam",
@@ -54,7 +54,7 @@ defmodule ControlPlus.ApiTest do
                      country: "Netherlands",
                      email: "someone@gmail.com",
                      entered: "Web-in",
-                     id: 1016570,
+                     ext_id: 1016570,
                      interjection: "Van den",
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser",
@@ -90,7 +90,7 @@ defmodule ControlPlus.ApiTest do
                %ControlPlus.Client{
                  address: "Somestreet 1",
                  bank_account: "NL08INGB0123456789",
-                 birthday: ~D[1981-06-24],
+                 birthdate: ~D[1981-06-24],
                  brought_by: nil,
                  campaign: nil,
                  city: "Utrecht",
@@ -100,7 +100,7 @@ defmodule ControlPlus.ApiTest do
                  country: "Netherlands",
                  email: "jane@doe.com",
                  entered: "Web-in",
-                 id: 1017831,
+                 ext_id: 1017831,
                  interjection: nil,
                  json_code: 14,
                  labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
@@ -440,7 +440,7 @@ defmodule ControlPlus.ApiTest do
       client = %ControlPlus.Client{
         address: "Somestreet 1",
         bank_account: "NL08INGB0123456789",
-        birthday: ~D[1981-06-24],
+        birthdate: ~D[1981-06-24],
         city: "Utrecht",
         comment: "Afvallers /niet geselecteerd/ in de toekomst contacten",
         country: "Netherlands",

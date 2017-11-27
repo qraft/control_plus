@@ -3,7 +3,7 @@ defmodule ControlPlus.ClientTest do
   @client_struct %ControlPlus.Client{
     address: "Somestreet 1",
     bank_account: "NL08INGB0123456789",
-    birthday: ~D[1981-06-24],
+    birthdate: ~D[1981-06-24],
     city: "Utrecht",
     comment: "Afvallers /niet geselecteerd/ in de toekomst contacten",
     country: "Netherlands",

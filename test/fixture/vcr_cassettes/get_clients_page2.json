@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "ssl_options": {
+          "versions": [
+            "tlsv1.2"
+          ]
+        }
+      },
+      "request_body": "",
+      "url": "https://elitefit.opencontrolplus.com/cp_api?params%5Bpage%5D=2&params%5Blimit%5D=&key=558f5b7c12eae18e695fb40e37b0e50130a55201&method=clients_list"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"error\":\"0\",\"result\":{\"current_page\":\"2\",\"total_pages\":\"31\",\"users\":{\"1023297\":{\"address\":\"somestreet 123\",\"lastname\":\"tester1\",\"interjection\":\"\",\"member_number\":\"71\",\"name\":\"user\",\"phone\":\"\",\"comment\":\"Niet bereikbaar. Enkele malen voicemail ingesproken. Reageert niet op contactpogingen\",\"mob_phone\":\"0612345678\",\"club_card_amount\":\"0.0\",\"province\":\"\",\"city\":\"sincity\",\"email\":\"testuser2@example.com\",\"sex\":\"F\",\"personal_coach\":\"\",\"photo\":\"\",\"sales\":\"\",\"entered\":\"Web-in\",\"brought_by\":\"\",\"labels\":\"Afvallers /niet geselecteerd/ in de toekomst contacten\",\"country\":\"Netherlands\",\"updated_at\":\"2016-10-13 20:36:49\",\"campaign\":\"\",\"zipcode\":\"1111AA\",\"birthday\":\"1994-11-08\"},\"1021592\":{\"address\":\"somestreet 123\",\"lastname\":\"testuser2\",\"interjection\":\"\",\"member_number\":\"68\",\"name\":\"user\",\"phone\":\"0612345678\",\"comment\":\"Meerdere malen uitgenodigd voor deelname pilot groep + contactpogingen maar geen respons\",\"mob_phone\":\"0612345678\",\"club_card_amount\":\"0.0\",\"province\":\"\",\"city\":\"Utrecht\",\"email\":\"user@example.nl\",\"sex\":\"F\",\"personal_coach\":\"\",\"photo\":\"\",\"sales\":\"\",\"entered\":\"Web-in\",\"brought_by\":\"\",\"labels\":\"Afvallers /niet geselecteerd/ in de toekomst contacten\",\"country\":\"Netherlands\",\"updated_at\":\"2016-10-13 20:40:12\",\"campaign\":\"\",\"zipcode\":\"1111AA\",\"birthday\":\"1975-11-10\"}}}}",
+      "headers": {
+        "Date": "Mon, 27 Nov 2017 09:59:54 GMT",
+        "Server": "Apache/2.2.15 (CentOS)",
+        "Expires": "-1",
+        "Pragma": "no-cache",
+        "X-Runtime": "0.45826",
+        "ETag": "\"99b9f6ceddb97ddaa955cbd6624aba12\"",
+        "X-Powered-By": "",
+        "Cache-Control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "P3P": "policyref=\"/w3c/p3p.xml\", CP=\"NON DSP ADM DEV PSD IVDo OUR IND STP PHY PRE NAV UNI OHO:*.opencontrolplus.com\"",
+        "Set-Cookie": "_mysportpages_session_id_=b4d8fcf9714a4b9d12a757ae343760e9; domain=.opencontrolplus.com; path=/; HttpOnly",
+        "Content-Length": "17721",
+        "Last-Modified": "Mon, 27 Nov 2017 09:43:14 GMT",
+        "Status": "200 OK",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
