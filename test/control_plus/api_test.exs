@@ -27,7 +27,7 @@ defmodule ControlPlus.ApiTest do
                      country: "Netherlands",
                      email: "test@user.com",
                      entered: "Web-in",
-                     ext_id: 1014557,
+                     control_plus_id: 1014557,
                      interjection: nil,
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser2",
@@ -39,7 +39,7 @@ defmodule ControlPlus.ApiTest do
                      photo: nil,
                      province: nil,
                      sales: nil,
-                     sex: "F",
+                     gender: "F",
                      updated_at: "2017-08-03 13:24:04",
                      zipcode: "2211GB"
                    },
@@ -54,7 +54,7 @@ defmodule ControlPlus.ApiTest do
                      country: "Netherlands",
                      email: "someone@gmail.com",
                      entered: "Web-in",
-                     ext_id: 1016570,
+                     control_plus_id: 1016570,
                      interjection: "Van den",
                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
                      lastname: "Testuser",
@@ -66,7 +66,7 @@ defmodule ControlPlus.ApiTest do
                      photo: nil,
                      province: nil,
                      sales: nil,
-                     sex: "M",
+                     gender: "M",
                      updated_at: "2017-03-29 14:22:17",
                      zipcode: "1111AA"
                    }
@@ -100,7 +100,7 @@ defmodule ControlPlus.ApiTest do
                  country: "Netherlands",
                  email: "jane@doe.com",
                  entered: "Web-in",
-                 ext_id: 1017831,
+                 control_plus_id: 1017831,
                  interjection: nil,
                  json_code: 14,
                  labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
@@ -113,7 +113,7 @@ defmodule ControlPlus.ApiTest do
                  photo: nil,
                  province: nil,
                  sales: nil,
-                 sex: "F",
+                 gender: "F",
                  updated_at: nil,
                  zipcode: "1111AB"
                }
@@ -123,132 +123,82 @@ defmodule ControlPlus.ApiTest do
 
   test "should get a list of activities" do
     use_cassette "get_activities" do
-      assert {
-               :ok,
-               [
-                 %ControlPlus.Activity{
-                   max_capacity: nil,
-                   count: nil,
-                   date: nil,
-                   description: nil,
-                   description_long: nil,
-                   end_time: nil,
-                   image: nil,
-                   price: nil,
-                   staff_id: nil,
-                   staff_name: nil,
-                   start: nil,
-                   starts_at: nil,
-                   status: nil,
-                   sub_type_id: 0,
-                   end_date: %Date{
-                     calendar: Calendar.ISO,
-                     day: 17,
-                     month: 3,
-                     year: 2019
-                   },
-                   activity_definition_id: 16939,
-                   name: "Your personal coach",
-                   schedule: %ControlPlus.Schedule{
-                     available: nil,
-                     waitlist_size: nil,
-                     start: %Time{
-                       calendar: Calendar.ISO,
-                       microsecond: {0, 0},
-                       minute: 0,
-                       second: 0,
-                       hour: 10
-                     },
-                     weekday: 6
-                   },
-                   starts_on: %Date{
-                     calendar: Calendar.ISO,
-                     year: 2017,
-                     day: 27,
-                     month: 2
-                   }
-                 },
-                 %ControlPlus.Activity{
-                   max_capacity: nil,
-                   count: nil,
-                   date: nil,
-                   description: nil,
-                   description_long: nil,
-                   end_time: nil,
-                   image: nil,
-                   name: "Your personal coach",
-                   price: nil,
-                   staff_id: nil,
-                   staff_name: nil,
-                   start: nil,
-                   starts_on: ~D[2017-02-27],
-                   starts_at: nil,
-                   status: nil,
-                   sub_type_id: 0,
-                   end_date: %Date{
-                     calendar: Calendar.ISO,
-                     day: 17,
-                     month: 3,
-                     year: 2023
-                   },
-                   activity_definition_id: 18337,
-                   schedule: %ControlPlus.Schedule{
-                     available: nil,
-                     waitlist_size: nil,
-                     start: %Time{
-                       calendar: Calendar.ISO,
-                       microsecond: {0, 0},
-                       second: 0,
-                       hour: 20,
-                       minute: 15
-                     },
-                     weekday: 2
-                   }
-                 },
-                 %ControlPlus.Activity{
-                   max_capacity: nil,
-                   count: nil,
-                   date: nil,
-                   description: nil,
-                   description_long: nil,
-                   end_time: nil,
-                   image: nil,
-                   price: nil,
-                   staff_id: nil,
-                   staff_name: nil,
-                   start: nil,
-                   starts_at: nil,
-                   status: nil,
-                   sub_type_id: 0,
-                   end_date: %Date{
-                     calendar: Calendar.ISO,
-                     day: 5,
-                     month: 6,
-                     year: 2017
-                   },
-                   activity_definition_id: 17916,
-                   name: "MURPH special",
-                   schedule: %ControlPlus.Schedule{
-                     available: nil,
-                     waitlist_size: nil,
-                     start: %Time{
-                       calendar: Calendar.ISO,
-                       microsecond: {0, 0},
-                       second: 0,
-                       hour: 9,
-                       minute: 0
-                     },
-                     weekday: 1
-                   },
-                   starts_on: %Date{
-                     calendar: Calendar.ISO,
-                     year: 2017,
-                     day: 5,
-                     month: 6
-                   }
-                 }
-               ]
-             } == ControlPlus.activities()
+      assert  {
+                :ok,
+                [
+                  %{
+                    __struct__: ControlPlus.Activity,
+                    control_plus_id: 16939,
+                    count: nil,
+                    date: nil,
+                    description: nil,
+                    description_long: nil,
+                    end_date: ~D[2019-03-17],
+                    end_time: nil,
+                    ends_at: nil,
+                    image: nil,
+                    max_capacity: nil,
+                    name: "Your personal coach",
+                    price: nil,
+                    staff_id: nil,
+                    staff_name: nil,
+                    start: nil,
+                    start_date: ~D[2017-02-27],
+                    start_time: nil,
+                    starts_at: ~N[2017-02-27 10:00:00],
+                    status: nil,
+                    sub_type_id: 0
+                  },
+                  %{
+                    __struct__: ControlPlus.Activity,
+                    control_plus_id: 18337,
+                    count: nil,
+                    date: nil,
+                    description: nil,
+                    description_long: nil,
+                    end_date: ~D[2023-03-17],
+                    end_time: nil,
+                    ends_at: nil,
+                    image: nil,
+                    max_capacity: nil,
+                    name: "Your personal coach",
+                    price: nil,
+                    staff_id: nil,
+                    staff_name: nil,
+                    start: nil,
+                    start_date: ~D[2017-02-27],
+                    start_time: nil,
+                    starts_at: ~N[2017-02-27 20:15:00],
+                    status: nil,
+                    sub_type_id: 0
+                  },
+                  %{
+                    __struct__: ControlPlus.Activity,
+                    control_plus_id: 17916,
+                    count: nil,
+                    date: nil,
+                    description: nil,
+                    description_long: nil,
+                    end_date: ~D[2017-06-05],
+                    end_time: nil,
+                    ends_at: nil,
+                    image: nil,
+                    max_capacity: nil,
+                    name: "MURPH special",
+                    price: nil,
+                    staff_id: nil,
+                    staff_name: nil,
+                    start: nil,
+                    start_date: ~D[2017-06-05],
+                    start_time: nil,
+                    starts_at: ~N[2017-06-05 09:00:00],
+                    status: nil,
+                    sub_type_id: 0
+                  }
+                ]
+              }
+
+              == ControlPlus.activities()
     end
   end
 
@@ -262,12 +212,11 @@ defmodule ControlPlus.ApiTest do
             count: 1,
             date: ~D[2017-05-08],
             end_date: nil,
-            activity_definition_id: 16443,
+            control_plus_id: 16443,
             name: "PowerBuilding Deadlift",
             price: nil,
-            schedule: nil,
             start: ~T[19:00:00],
-            starts_on: nil,
+            start_date: nil,
             status: 0,
             sub_type_id: nil
           },
@@ -275,12 +224,11 @@ defmodule ControlPlus.ApiTest do
             count: 1,
             date: ~D[2017-08-17],
             end_date: nil,
-            activity_definition_id: 18345,
+            control_plus_id: 18345,
             name: "PowerBuilding Bench",
             price: nil,
-            schedule: nil,
             start: ~T[19:00:00],
-            starts_on: nil,
+            start_date: nil,
             status: 0,
             sub_type_id: nil
           }
@@ -292,99 +240,58 @@ defmodule ControlPlus.ApiTest do
 
   test "activity details" do
     use_cassette "activity_details" do
-      assert {
-               :ok,
-               [
-                 %ControlPlus.Activity{
-                   count: nil,
-                   date: nil,
-                   description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
-                   end_date: nil,
-                   price: nil,
-                   staff_id: nil,
-                   staff_name: nil,
-                   start: nil,
-                   starts_on: nil,
-                   status: nil,
-                   sub_type_id: nil,
-                   max_capacity: 12,
-                   description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nlevel 1\n</body>\n</html>",
-                   end_time: %Time{
-                     calendar: Calendar.ISO,
-                     microsecond: {0, 0},
-                     second: 0,
-                     hour: 20,
-                     minute: 0
-                   },
-                   activity_definition_id: 18575,
-                   image: "/uploads/27/88/24/13/app_bg_bench.jpg",
-                   name: "PowerBuilding Bench",
-                   schedule: %ControlPlus.Schedule{
-                     waitlist_size: 0,
-                     weekday: nil,
-                     available: 4,
-                     start: %Time{
-                       calendar: Calendar.ISO,
-                       microsecond: {0, 0},
-                       second: 0,
-                       hour: 19,
-                       minute: 0
-                     }
-                   },
-                   starts_at: %Time{
-                     calendar: Calendar.ISO,
-                     microsecond: {0, 0},
-                     second: 0,
-                     hour: 19,
-                     minute: 0
-                   }
-                 },
-                 %ControlPlus.Activity{
-                   count: nil,
-                   date: nil,
-                   description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
-                   end_date: nil,
-                   price: nil,
-                   staff_id: nil,
-                   staff_name: nil,
-                   start: nil,
-                   starts_on: nil,
-                   status: nil,
-                   sub_type_id: nil,
-                   max_capacity: 24,
-                   description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nLevel 1\n</body>\n</html>",
-                   end_time: %Time{
-                     calendar: Calendar.ISO,
-                     microsecond: {0, 0},
-                     second: 0,
-                     hour: 18,
-                     minute: 15
-                   },
-                   activity_definition_id: 16343,
-                   image: "/uploads/27/35/85/86/metcon-800x450.jpg",
-                   name: "MetCon30",
-                   schedule: %ControlPlus.Schedule{
-                     waitlist_size: 0,
-                     weekday: nil,
-                     available: 2,
-                     start: %Time{
-                       calendar: Calendar.ISO,
-                       microsecond: {0, 0},
-                       second: 0,
-                       hour: 17,
-                       minute: 45
-                     }
-                   },
-                   starts_at: %Time{
-                     calendar: Calendar.ISO,
-                     microsecond: {0, 0},
-                     second: 0,
-                     hour: 17,
-                     minute: 45
-                   }
-                 }
-               ]
-             } == ControlPlus.activity_details()
+      assert  {
+                :ok,
+                [
+                  %{
+                    __struct__: ControlPlus.Activity,
+                    control_plus_id: 18575,
+                    count: nil,
+                    date: nil,
+                    description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nlevel 1\n</body>\n</html>",
+                    description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
+                    end_date: nil,
+                    end_time: ~T[20:00:00],
+                    ends_at: nil,
+                    image: "/uploads/27/88/24/13/app_bg_bench.jpg",
+                    max_capacity: 12,
+                    name: "PowerBuilding Bench",
+                    price: nil,
+                    staff_id: nil,
+                    staff_name: nil,
+                    start: nil,
+                    start_date: nil,
+                    start_time: ~T[19:00:00],
+                    starts_at: nil,
+                    status: nil,
+                    sub_type_id: nil
+                  },
+                  %{
+                    __struct__: ControlPlus.Activity,
+                    control_plus_id: 16343,
+                    count: nil,
+                    date: nil,
+                    description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nLevel 1\n</body>\n</html>",
+                    description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
+                    end_date: nil,
+                    end_time: ~T[18:15:00],
+                    ends_at: nil,
+                    image: "/uploads/27/35/85/86/metcon-800x450.jpg",
+                    max_capacity: 24,
+                    name: "MetCon30",
+                    price: nil,
+                    staff_id: nil,
+                    staff_name: nil,
+                    start: nil,
+                    start_date: nil,
+                    start_time: ~T[17:45:00],
+                    starts_at: nil,
+                    status: nil,
+                    sub_type_id: nil
+                  }
+                ]
+              } == ControlPlus.activity_details()
+
     end
   end
 
@@ -395,14 +302,14 @@ defmodule ControlPlus.ApiTest do
       assert {
                :ok,
                [
-                 %ControlPlus.Reservation{id: 2758360, user_id: 1251776},
-                 %ControlPlus.Reservation{id: 2759008, user_id: 1247568},
-                 %ControlPlus.Reservation{id: 2759608, user_id: 1215297},
-                 %ControlPlus.Reservation{id: 2761606, user_id: 1243171},
-                 %ControlPlus.Reservation{id: 2762629, user_id: 1239420},
-                 %ControlPlus.Reservation{id: 2763348, user_id: 1245300},
-                 %ControlPlus.Reservation{id: 2767447, user_id: 1211655},
-                 %ControlPlus.Reservation{id: 2768876, user_id: 1233832}
+                 %ControlPlus.Reservation{id: 2758360, control_plus_user_id: 1251776},
+                 %ControlPlus.Reservation{id: 2759008, control_plus_user_id: 1247568},
+                 %ControlPlus.Reservation{id: 2759608, control_plus_user_id: 1215297},
+                 %ControlPlus.Reservation{id: 2761606, control_plus_user_id: 1243171},
+                 %ControlPlus.Reservation{id: 2762629, control_plus_user_id: 1239420},
+                 %ControlPlus.Reservation{id: 2763348, control_plus_user_id: 1245300},
+                 %ControlPlus.Reservation{id: 2767447, control_plus_user_id: 1211655},
+                 %ControlPlus.Reservation{id: 2768876, control_plus_user_id: 1233832}
                ]
              } == ControlPlus.reservations(18575, date_time)
     end
@@ -450,7 +357,7 @@ defmodule ControlPlus.ApiTest do
         mobile_phone: "0612345678",
         name: "Jane",
         password: "test123",
-        sex: "F",
+        gender: "F",
         zipcode: "1111AB",
       }
       assert  {

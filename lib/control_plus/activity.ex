@@ -11,15 +11,17 @@ defmodule ControlPlus.Activity do
     :description_long,
     :end_date,
     :end_time,
-    :activity_definition_id,
+    :control_plus_id,
     :image,
     :name,
     :price,
     :schedule,
     :staff_id,
     :start,
-    :starts_on,
+    :start_date,
+    :start_time,
     :starts_at,
+    :ends_at,
     :status,
     :sub_type_id,
     :staff_name,
@@ -28,14 +30,14 @@ defmodule ControlPlus.Activity do
 
   @mapping %{
     "capacity" => :max_capacity,
-    "activity_id" => :activity_definition_id,
+    "activity_id" => :control_plus_id,
     "activity_id_name" => :name,
     "enddate" => :end_date,
     "endtime" => :end_time,
     "ext_description" => :description_long,
     "shedule" => :schedule,
-    "startdate" => :starts_on,
-    "start_time" => :starts_at,
+    "startdate" => :start_date,
+    "start_time" => :start_time,
   }
 
   @spec parse({String.t, map}) :: %ControlPlus.Activity{}
@@ -48,11 +50,15 @@ defmodule ControlPlus.Activity do
       end
     )
     schedule = ControlPlus.Schedule.parse(activities.schedule)
-    result = Map.put(activities, :schedule, schedule)
+    activities
+    |> Map.delete(:schedule)
+    |> ControlPlus.Helpers.TimeHelper.compose_timestamps(schedule.start_time)
 #    {ControlPlus.Helpers.CastHelper.cast(id), result}
-    result
+
   end
 
   @spec map_key(String.t) :: atom
   defp map_key(key), do: Map.get(@mapping, key, String.to_atom(key))
+
+
 end

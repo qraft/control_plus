@@ -13,7 +13,7 @@ defmodule ControlPlus.ClientTest do
     mobile_phone: "0612345678",
     name: "Jane",
     password: "test123",
-    sex: "F",
+    gender: "F",
     zipcode: "1111AB",
   }
 

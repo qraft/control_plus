@@ -87,4 +87,6 @@ defmodule ControlPlus.Helpers.CastHelper do
   @spec maybe_reverse_cast_date(any) :: String.t
   defp maybe_reverse_cast_date(%Date{} = date), do: ControlPlus.Helpers.DateHelper.format_date_for_api(date)
   defp maybe_reverse_cast_date(value), do: "#{value}"
+
+
 end

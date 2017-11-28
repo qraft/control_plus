@@ -3,12 +3,12 @@ defmodule ControlPlus.Schedule do
   A schedule struct, also takes care of converting the json to a struct
   """
 
-  defstruct [:available, :start, :waitlist_size, :weekday]
+  defstruct [:available, :start_time, :starts_at, :waitlist_size, :weekday]
 
-  @mapping %{}
+  @mapping %{"start" => :start_time}
 
   @spec parse(map) :: map
-  def parse(nil), do: nil
+  def parse(nil), do: %ControlPlus.Schedule{}
   def parse(%{} = schedule) when schedule == %{}, do: nil
   def parse(%{"1" => data}) do
     Enum.reduce(
