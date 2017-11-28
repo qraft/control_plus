@@ -4,7 +4,7 @@ defmodule ControlPlus.Activity do
   """
 
   defstruct [
-    :capacity,
+    :max_capacity,
     :count,
     :date,
     :description,
@@ -18,8 +18,8 @@ defmodule ControlPlus.Activity do
     :schedule,
     :staff_id,
     :start,
-    :start_date,
-    :start_time,
+    :starts_on,
+    :starts_at,
     :status,
     :sub_type_id,
     :staff_name,
@@ -27,14 +27,15 @@ defmodule ControlPlus.Activity do
   ]
 
   @mapping %{
+    "capacity" => :max_capacity,
     "activity_id" => :id,
     "activity_id_name" => :name,
     "enddate" => :end_date,
     "endtime" => :end_time,
     "ext_description" => :description_long,
     "shedule" => :schedule,
-    "startdate" => :start_date,
-    "starttime" => :start_time,
+    "startdate" => :starts_on,
+    "start_time" => :starts_at,
   }
 
   @spec parse({String.t, map}) :: %ControlPlus.Activity{}

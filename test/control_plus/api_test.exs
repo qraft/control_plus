@@ -127,7 +127,7 @@ defmodule ControlPlus.ApiTest do
                :ok,
                [
                  %ControlPlus.Activity{
-                   capacity: nil,
+                   max_capacity: nil,
                    count: nil,
                    date: nil,
                    description: nil,
@@ -138,7 +138,7 @@ defmodule ControlPlus.ApiTest do
                    staff_id: nil,
                    staff_name: nil,
                    start: nil,
-                   start_time: nil,
+                   starts_at: nil,
                    status: nil,
                    sub_type_id: 0,
                    end_date: %Date{
@@ -161,7 +161,7 @@ defmodule ControlPlus.ApiTest do
                      },
                      weekday: 6
                    },
-                   start_date: %Date{
+                   starts_on: %Date{
                      calendar: Calendar.ISO,
                      year: 2017,
                      day: 27,
@@ -169,7 +169,7 @@ defmodule ControlPlus.ApiTest do
                    }
                  },
                  %ControlPlus.Activity{
-                   capacity: nil,
+                   max_capacity: nil,
                    count: nil,
                    date: nil,
                    description: nil,
@@ -181,8 +181,8 @@ defmodule ControlPlus.ApiTest do
                    staff_id: nil,
                    staff_name: nil,
                    start: nil,
-                   start_date: ~D[2017-02-27],
-                   start_time: nil,
+                   starts_on: ~D[2017-02-27],
+                   starts_at: nil,
                    status: nil,
                    sub_type_id: 0,
                    end_date: %Date{
@@ -206,7 +206,7 @@ defmodule ControlPlus.ApiTest do
                    }
                  },
                  %ControlPlus.Activity{
-                   capacity: nil,
+                   max_capacity: nil,
                    count: nil,
                    date: nil,
                    description: nil,
@@ -217,7 +217,7 @@ defmodule ControlPlus.ApiTest do
                    staff_id: nil,
                    staff_name: nil,
                    start: nil,
-                   start_time: nil,
+                   starts_at: nil,
                    status: nil,
                    sub_type_id: 0,
                    end_date: %Date{
@@ -240,7 +240,7 @@ defmodule ControlPlus.ApiTest do
                      },
                      weekday: 1
                    },
-                   start_date: %Date{
+                   starts_on: %Date{
                      calendar: Calendar.ISO,
                      year: 2017,
                      day: 5,
@@ -267,7 +267,7 @@ defmodule ControlPlus.ApiTest do
             price: nil,
             schedule: nil,
             start: ~T[19:00:00],
-            start_date: nil,
+            starts_on: nil,
             status: 0,
             sub_type_id: nil
           },
@@ -280,7 +280,7 @@ defmodule ControlPlus.ApiTest do
             price: nil,
             schedule: nil,
             start: ~T[19:00:00],
-            start_date: nil,
+            starts_on: nil,
             status: 0,
             sub_type_id: nil
           }
@@ -304,10 +304,10 @@ defmodule ControlPlus.ApiTest do
                    staff_id: nil,
                    staff_name: nil,
                    start: nil,
-                   start_date: nil,
+                   starts_on: nil,
                    status: nil,
                    sub_type_id: nil,
-                   capacity: 12,
+                   max_capacity: 12,
                    description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nlevel 1\n</body>\n</html>",
                    end_time: %Time{
                      calendar: Calendar.ISO,
@@ -331,7 +331,7 @@ defmodule ControlPlus.ApiTest do
                        minute: 0
                      }
                    },
-                   start_time: %Time{
+                   starts_at: %Time{
                      calendar: Calendar.ISO,
                      microsecond: {0, 0},
                      second: 0,
@@ -348,10 +348,10 @@ defmodule ControlPlus.ApiTest do
                    staff_id: nil,
                    staff_name: nil,
                    start: nil,
-                   start_date: nil,
+                   starts_on: nil,
                    status: nil,
                    sub_type_id: nil,
-                   capacity: 24,
+                   max_capacity: 24,
                    description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nLevel 1\n</body>\n</html>",
                    end_time: %Time{
                      calendar: Calendar.ISO,
@@ -375,7 +375,7 @@ defmodule ControlPlus.ApiTest do
                        minute: 45
                      }
                    },
-                   start_time: %Time{
+                   starts_at: %Time{
                      calendar: Calendar.ISO,
                      microsecond: {0, 0},
                      second: 0,
