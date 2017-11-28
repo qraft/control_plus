@@ -11,7 +11,7 @@ defmodule ControlPlus.Activity do
     :description_long,
     :end_date,
     :end_time,
-    :id,
+    :activity_definition_id,
     :image,
     :name,
     :price,
@@ -28,7 +28,7 @@ defmodule ControlPlus.Activity do
 
   @mapping %{
     "capacity" => :max_capacity,
-    "activity_id" => :id,
+    "activity_id" => :activity_definition_id,
     "activity_id_name" => :name,
     "enddate" => :end_date,
     "endtime" => :end_time,
@@ -39,7 +39,7 @@ defmodule ControlPlus.Activity do
   }
 
   @spec parse({String.t, map}) :: %ControlPlus.Activity{}
-  def parse({id, data}) do
+  def parse({_id, data}) do
     activities = Enum.reduce(
       data,
       %ControlPlus.Activity{},

@@ -147,7 +147,7 @@ defmodule ControlPlus.ApiTest do
                      month: 3,
                      year: 2019
                    },
-                   id: 16939,
+                   activity_definition_id: 16939,
                    name: "Your personal coach",
                    schedule: %ControlPlus.Schedule{
                      available: nil,
@@ -191,7 +191,7 @@ defmodule ControlPlus.ApiTest do
                      month: 3,
                      year: 2023
                    },
-                   id: 18337,
+                   activity_definition_id: 18337,
                    schedule: %ControlPlus.Schedule{
                      available: nil,
                      waitlist_size: nil,
@@ -226,7 +226,7 @@ defmodule ControlPlus.ApiTest do
                      month: 6,
                      year: 2017
                    },
-                   id: 17916,
+                   activity_definition_id: 17916,
                    name: "MURPH special",
                    schedule: %ControlPlus.Schedule{
                      available: nil,
@@ -262,7 +262,7 @@ defmodule ControlPlus.ApiTest do
             count: 1,
             date: ~D[2017-05-08],
             end_date: nil,
-            id: 16443,
+            activity_definition_id: 16443,
             name: "PowerBuilding Deadlift",
             price: nil,
             schedule: nil,
@@ -275,7 +275,7 @@ defmodule ControlPlus.ApiTest do
             count: 1,
             date: ~D[2017-08-17],
             end_date: nil,
-            id: 18345,
+            activity_definition_id: 18345,
             name: "PowerBuilding Bench",
             price: nil,
             schedule: nil,
@@ -316,7 +316,7 @@ defmodule ControlPlus.ApiTest do
                      hour: 20,
                      minute: 0
                    },
-                   id: 18575,
+                   activity_definition_id: 18575,
                    image: "/uploads/27/88/24/13/app_bg_bench.jpg",
                    name: "PowerBuilding Bench",
                    schedule: %ControlPlus.Schedule{
@@ -360,7 +360,7 @@ defmodule ControlPlus.ApiTest do
                      hour: 18,
                      minute: 15
                    },
-                   id: 16343,
+                   activity_definition_id: 16343,
                    image: "/uploads/27/35/85/86/metcon-800x450.jpg",
                    name: "MetCon30",
                    schedule: %ControlPlus.Schedule{

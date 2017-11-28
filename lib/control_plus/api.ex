@@ -110,7 +110,7 @@ defmodule ControlPlus.Api do
   end
 
   def make_reservation(client_id, activity_id, date_time) do
-    result = ControlPlus.ApiClient.fetch(
+    ControlPlus.ApiClient.fetch(
       :req_reservation,
       params: [
         client_id: client_id,
@@ -121,7 +121,7 @@ defmodule ControlPlus.Api do
   end
 
   def cancel_reservation(client_id, activity_id, date_time) do
-    result = ControlPlus.ApiClient.fetch(
+    ControlPlus.ApiClient.fetch(
       :req_cancel,
       params: [
         client_id: client_id,
