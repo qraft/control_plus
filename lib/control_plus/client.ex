@@ -64,6 +64,8 @@ defmodule ControlPlus.Client do
          end
        )
     |> Map.put(:control_plus_id, ControlPlus.Helpers.CastHelper.cast(id))
+    |> maybe_set_phone_to_mobile_phone
+    |> maybe_fix_mobile_phone
   end
 
   @doc "Takes a %ControlPlus.Client{} struct and transforms that to a map which is accepted by the api to post"
@@ -110,4 +112,16 @@ defmodule ControlPlus.Client do
     |> Map.put("country_id", country_id)
   end
   defp replace_country(params), do: params
+
+
+  defp maybe_set_phone_to_mobile_phone(%{phone: "06" <> number} = client) do
+    client
+    |> Map.put(:phone, nil)
+    |> Map.put(:mobile_phone, "06" <> number)
+  end
+  defp maybe_set_phone_to_mobile_phone(client), do: client
+
+  defp maybe_fix_mobile_phone(%{mobile_phone: number} = client) do
+    Map.put(client, :mobile_phone, String.replace(number, " ", ""))
+  end
 end

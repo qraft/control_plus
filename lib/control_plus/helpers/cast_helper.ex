@@ -9,6 +9,7 @@ defmodule ControlPlus.Helpers.CastHelper do
   @spec cast(any) :: any
   def cast(value) when is_binary(value) do
     value
+    |> String.trim
     |> maybe_cast_to_date
     |> maybe_cast_to_time
     |> maybe_cast_to_datetime
