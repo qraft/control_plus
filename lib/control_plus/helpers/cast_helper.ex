@@ -11,6 +11,7 @@ defmodule ControlPlus.Helpers.CastHelper do
     value
     |> maybe_cast_to_date
     |> maybe_cast_to_time
+    |> maybe_cast_to_datetime
     |> maybe_cast_to_int
     |> maybe_cast_to_float
     |> maybe_cast_to_nil
@@ -69,7 +70,15 @@ defmodule ControlPlus.Helpers.CastHelper do
       _ -> value
     end
   end
-  #  defp maybe_cast_to_date(value), do: value
+
+  @spec maybe_cast_to_datetime(any) :: any
+  defp maybe_cast_to_datetime(value) when is_binary(value) do
+    case NaiveDateTime.from_iso8601(value) do
+      {:ok, date} -> date
+      _ -> value
+    end
+  end
+  defp maybe_cast_to_datetime(value), do: value
 
   @spec maybe_cast_to_time(any) :: any
   defp maybe_cast_to_time(value) when is_binary(value) do

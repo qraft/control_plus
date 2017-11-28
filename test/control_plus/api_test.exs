@@ -40,7 +40,7 @@ defmodule ControlPlus.ApiTest do
                      province: nil,
                      sales: nil,
                      gender: "F",
-                     updated_at: "2017-08-03 13:24:04",
+                     updated_at: ~N[2017-08-03 13:24:04],
                      zipcode: "2211GB"
                    },
                    %ControlPlus.Client{
@@ -67,7 +67,7 @@ defmodule ControlPlus.ApiTest do
                      province: nil,
                      sales: nil,
                      gender: "M",
-                     updated_at: "2017-03-29 14:22:17",
+                     updated_at: ~N[2017-03-29 14:22:17],
                      zipcode: "1111AA"
                    }
                  ]
