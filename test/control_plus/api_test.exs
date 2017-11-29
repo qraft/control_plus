@@ -10,83 +10,77 @@ defmodule ControlPlus.ApiTest do
 
   test "should get a list of clients" do
     use_cassette "get_clients" do
-      assert  {
-                :ok,
-                %{
-                  clients: [
-                    %{
-                      __struct__: ControlPlus.Client,
-                      address: "Somewhere 123",
-                      bank_account: nil,
-                      birthdate: ~D[1984-06-09],
-                      brought_by: nil,
-                      campaign: nil,
-                      city: "Den Haag",
-                      club_card_amount: 0.0,
-                      club_id: nil,
-                      comment: "Aangemeld bij Demodag. Na telefonische intake afgesproken op de wachtlijst voor pilot 3 of 4 . Stopt per 1 aug. #06  heeft geen rede op gegeven.",
-                      control_plus_id: 1014557,
-                      country: "Netherlands",
-                      email: "test@user.com",
-                      entered: "Web-in",
-                      gender: "F",
-                      interjection: nil,
-                      json_code: nil,
-                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
-                      lastname: "Testuser2",
-                      member_number: 45,
-                      mobile_phone: "0612345678",
-                      name: "Test",
-                      password: nil,
-                      personal_coach: nil,
-                      phone: nil,
-                      photo: nil,
-                      prefix: nil,
-                      province: nil,
-                      sales: nil,
-                      street: nil,
-                      updated_at: ~N[2017-08-03 13:24:04],
-                      zipcode: "2211GB"
-                    },
-                    %{
-                      __struct__: ControlPlus.Client,
-                      address: "Somestreet 1",
-                      bank_account: nil,
-                      birthdate: ~D[1967-07-27],
-                      brought_by: nil,
-                      campaign: nil,
-                      city: "Amsterdam",
-                      club_card_amount: 0.0,
-                      club_id: nil,
-                      comment: "Just some comment here",
-                      control_plus_id: 1016570,
-                      country: "Netherlands",
-                      email: "someone@gmail.com",
-                      entered: "Web-in",
-                      gender: "M",
-                      interjection: "Van den",
-                      json_code: nil,
-                      labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
-                      lastname: "Testuser",
-                      member_number: 24,
-                      mobile_phone: "0612345678",
-                      name: "Test",
-                      password: nil,
-                      personal_coach: nil,
-                      phone: nil,
-                      photo: nil,
-                      prefix: nil,
-                      province: nil,
-                      sales: nil,
-                      street: nil,
-                      updated_at: ~N[2017-03-29 14:22:17],
-                      zipcode: "1111AA"
-                    }
-                  ],
-                  current_page: 1,
-                  total_pages: 31
-                }
-              } == ControlPlus.paginated_clients()
+      assert   {
+                 :ok,
+                 %{
+                   clients: [
+                     %ControlPlus.Client{
+                       bank_account: nil,
+                       birthdate: ~D[1984-06-09],
+                       brought_by: nil,
+                       campaign: nil,
+                       city: "Den Haag",
+                       club_card_amount: 0.0,
+                       club_id: nil,
+                       comment: "Aangemeld bij Demodag. Na telefonische intake afgesproken op de wachtlijst voor pilot 3 of 4 . Stopt per 1 aug. #06  heeft geen rede op gegeven.",
+                       control_plus_id: 1014557,
+                       country: "Netherlands",
+                       email: "test@user.com",
+                       entered: "Web-in",
+                       gender: "F",
+                       json_code: nil,
+                       labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
+                       lastname: "Testuser2",
+                       member_number: 45,
+                       mobile_phone: "0612345678",
+                       name: "Test",
+                       password: nil,
+                       personal_coach: nil,
+                       phone: nil,
+                       photo: nil,
+                       prefix: nil,
+                       province: nil,
+                       sales: nil,
+                       street: "Somewhere 123",
+                       updated_at: ~N[2017-08-03 13:24:04],
+                       zipcode: "2211GB"
+                     },
+                     %ControlPlus.Client{
+                       bank_account: nil,
+                       birthdate: ~D[1967-07-27],
+                       brought_by: nil,
+                       campaign: nil,
+                       city: "Amsterdam",
+                       club_card_amount: 0.0,
+                       club_id: nil,
+                       comment: "Just some comment here",
+                       control_plus_id: 1016570,
+                       country: "Netherlands",
+                       email: "someone@gmail.com",
+                       entered: "Web-in",
+                       gender: "M",
+                       json_code: nil,
+                       labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
+                       lastname: "Testuser",
+                       member_number: 24,
+                       mobile_phone: "0612345678",
+                       name: "Test",
+                       password: nil,
+                       personal_coach: nil,
+                       phone: nil,
+                       photo: nil,
+                       prefix: "Van den",
+                       province: nil,
+                       sales: nil,
+                       street: "Somestreet 1",
+                       updated_at: ~N[2017-03-29 14:22:17],
+                       zipcode: "1111AA"
+                     }
+                   ],
+                   current_page: 1,
+                   total_pages: 31
+                 }
+               } == ControlPlus.paginated_clients()
     end
   end
 
@@ -102,7 +96,6 @@ defmodule ControlPlus.ApiTest do
       assert {
                :ok,
                %ControlPlus.Client{
-                 street: "Somestreet 1",
                  bank_account: "NL08INGB0123456789",
                  birthdate: ~D[1981-06-24],
                  brought_by: nil,
@@ -127,6 +120,7 @@ defmodule ControlPlus.ApiTest do
                  photo: nil,
                  province: nil,
                  sales: nil,
+                 street: "Somestreet 1",
                  gender: "F",
                  updated_at: nil,
                  zipcode: "1111AB"

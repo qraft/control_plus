@@ -38,10 +38,12 @@ defmodule ControlPlus.Client do
   @mapping %{
     "id" => :control_plus_id,
     "birthday" => :birthdate,
+    "address" => :street,
     "members_address" => :street,
     "members_city" => :city,
     "members_email" => :email,
     "members_interjection" => :prefix,
+    "interjection" => :prefix,
     "members_lastname" => :lastname,
     "members_mob_phone" => :mobile_phone,
     "mob_phone" => :mobile_phone,
