@@ -1,7 +1,7 @@
 defmodule ControlPlus.ClientTest do
   use ExUnit.Case
   @client_struct %ControlPlus.Client{
-    address: "Somestreet 1",
+    street: "Somestreet 1",
     bank_account: "NL08INGB0123456789",
     birthdate: ~D[1981-06-24],
     city: "Utrecht",

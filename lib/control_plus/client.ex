@@ -4,7 +4,7 @@ defmodule ControlPlus.Client do
   """
 
   defstruct [
-    :address,
+    :street,
     :bank_account,
     :birthdate,
     :brought_by,
@@ -38,7 +38,7 @@ defmodule ControlPlus.Client do
   @mapping %{
     "id" => :control_plus_id,
     "birthday" => :birthdate,
-    "members_address" => :address,
+    "members_address" => :street,
     "members_city" => :city,
     "members_email" => :email,
     "members_interjection" => :prefix,
