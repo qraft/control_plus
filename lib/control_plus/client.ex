@@ -121,7 +121,8 @@ defmodule ControlPlus.Client do
   end
   defp maybe_set_phone_to_mobile_phone(client), do: client
 
-  defp maybe_fix_mobile_phone(%{mobile_phone: number} = client) do
+  defp maybe_fix_mobile_phone(%{mobile_phone: number} = client) when is_binary(number) do
     Map.put(client, :mobile_phone, String.replace(number, " ", ""))
   end
+  defp maybe_fix_mobile_phone(client), do: client
 end
