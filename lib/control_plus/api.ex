@@ -56,11 +56,11 @@ defmodule ControlPlus.Api do
     end
   end
 
-  #TODO this should by default get a range of a week in the future, in the activity
   @doc "returns a list of activity for a given date, or otherwise today"
   @spec activities(Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def activities(date \\ nil) do
     date = date || Date.utc_today()
+
     case ControlPlus.ApiClient.fetch(:req_activity_group_details, date: ControlPlus.Helpers.DateHelper.format_date(date)) do
       {:ok, data} -> remap_activities(data, date)
       error -> error

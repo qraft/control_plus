@@ -3,7 +3,7 @@ defmodule ControlPlus do
   ControlPlus is a CRM system. This package wraps the api of that
   """
 
-  defdelegate activities(), to: ControlPlus.Api
+  defdelegate activities(date \\ nil), to: ControlPlus.Api
   defdelegate client_details(id), to: ControlPlus.Api
   defdelegate member_visits(client_id, from \\ nil, to \\ nil), to: ControlPlus.Api
   defdelegate paginated_clients(options \\ nil), to: ControlPlus.Api
