@@ -13,32 +13,6 @@ defmodule ControlPlus.Helpers.TimeHelper do
     starts_at: nil
   }
 
-  def compose_timestamps(%{date: date, start: time} = data, _time) when not is_nil(date) and not is_nil(time) do
-    process_timestamp(data, :starts_at, date, time)
-  end
-  def compose_timestamps(%{date: date, start: nil} = data) when not is_nil(date) do
-    process_timestamp(data, :starts_at, date, ~T[00:00:00])
-  end
-  def compose_timestamps(%{start_date: date, } = data, time) when not is_nil(date) and not is_nil(time) do
-    process_timestamp(data, :starts_at, date, time)
-  end
-  def compose_timestamps(%{start_date: date, } = data, nil) when not is_nil(date) do
-    process_timestamp(data, :starts_at, date, ~T[00:00:00])
-  end
-  def compose_timestamps(%{start_date: date, start_time: nil} = data) when not is_nil(date) do
-    process_timestamp(data, :starts_at, date, ~T[00:00:00])
-  end
-  def compose_timestamps(%{start_date: date, start_time: time} = data) when not is_nil(date) do
-    process_timestamp(data, :starts_at, date, time)
-  end
-  def compose_timestamps(%{end_date: date, end_time: nil} = data) when not is_nil(date) do
-    process_timestamp(data, :ends_at, date, ~T[00:00:00])
-  end
-  def compose_timestamps(%{end_date: date, end_time: time} = data) when not is_nil(date) do
-    process_timestamp(data, :ends_at, date, time)
-  end
-  def compose_timestamps(data), do: data
-  def compose_timestamps(data, _), do: data
 
   @spec format_time(Time.t) :: String.t
   def format_time(%Time{} = time) do
@@ -61,11 +35,5 @@ defmodule ControlPlus.Helpers.TimeHelper do
 
   defp to_i(binary), do: String.to_integer(binary)
 
-  defp process_timestamp(data, field, date, time) do
-    case NaiveDateTime.new(date, time) do
-      {:ok, datetime} -> Map.put(data, field, datetime)
-      _ -> data
-    end
-  end
 
 end

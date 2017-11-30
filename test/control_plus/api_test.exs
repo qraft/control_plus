@@ -42,7 +42,7 @@ defmodule ControlPlus.ApiTest do
                        province: nil,
                        sales: nil,
                        street: "Somewhere 123",
-                       updated_at: ~N[2017-08-03 13:24:04],
+                       updated_at: %DateTime{},
                        zipcode: "2211GB"
                      },
                      %ControlPlus.Client{
@@ -73,14 +73,14 @@ defmodule ControlPlus.ApiTest do
                        province: nil,
                        sales: nil,
                        street: "Somestreet 1",
-                       updated_at: ~N[2017-03-29 14:22:17],
+                       updated_at: %DateTime{},
                        zipcode: "1111AA"
                      }
                    ],
                    current_page: 1,
                    total_pages: 31
                  }
-               } == ControlPlus.paginated_clients()
+               } = ControlPlus.paginated_clients()
     end
   end
 
@@ -153,7 +153,7 @@ defmodule ControlPlus.ApiTest do
                     start: nil,
                     start_date: ~D[2017-02-27],
                     start_time: nil,
-                    starts_at: ~N[2017-02-27 10:00:00],
+                    starts_at: %DateTime{},
                     status: nil,
                     sub_type_id: 0
                   },
@@ -176,7 +176,7 @@ defmodule ControlPlus.ApiTest do
                     start: nil,
                     start_date: ~D[2017-02-27],
                     start_time: nil,
-                    starts_at: ~N[2017-02-27 20:15:00],
+                    starts_at: %DateTime{},
                     status: nil,
                     sub_type_id: 0
                   },
@@ -199,14 +199,12 @@ defmodule ControlPlus.ApiTest do
                     start: nil,
                     start_date: ~D[2017-06-05],
                     start_time: nil,
-                    starts_at: ~N[2017-06-05 09:00:00],
+                    starts_at: %DateTime{},
                     status: nil,
                     sub_type_id: 0
                   }
                 ]
-              }
-
-              == ControlPlus.activities()
+              } = ControlPlus.activities()
     end
   end
 
@@ -219,6 +217,7 @@ defmodule ControlPlus.ApiTest do
           %ControlPlus.Activity{
             count: 1,
             date: ~D[2017-05-08],
+            duration_in_minutes: nil,
             end_date: nil,
             control_plus_id: 16443,
             name: "PowerBuilding Deadlift",
@@ -231,6 +230,7 @@ defmodule ControlPlus.ApiTest do
           %ControlPlus.Activity{
             count: 1,
             date: ~D[2017-08-17],
+            duration_in_minutes: nil,
             end_date: nil,
             control_plus_id: 18345,
             name: "PowerBuilding Bench",
@@ -258,6 +258,7 @@ defmodule ControlPlus.ApiTest do
                     date: nil,
                     description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nlevel 1\n</body>\n</html>",
                     description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
+                    duration_in_minutes: 60,
                     end_date: nil,
                     end_time: ~T[20:00:00],
                     ends_at: nil,
@@ -270,7 +271,7 @@ defmodule ControlPlus.ApiTest do
                     start: nil,
                     start_date: nil,
                     start_time: ~T[19:00:00],
-                    starts_at: nil,
+                    starts_at: %DateTime{},
                     status: nil,
                     sub_type_id: nil
                   },
@@ -281,6 +282,7 @@ defmodule ControlPlus.ApiTest do
                     date: nil,
                     description: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\nLevel 1\n</body>\n</html>",
                     description_long: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n</head>\n<body>\n\n</body>\n</html>",
+                    duration_in_minutes: 30,
                     end_date: nil,
                     end_time: ~T[18:15:00],
                     ends_at: nil,
@@ -293,12 +295,12 @@ defmodule ControlPlus.ApiTest do
                     start: nil,
                     start_date: nil,
                     start_time: ~T[17:45:00],
-                    starts_at: nil,
+                    starts_at: %DateTime{},
                     status: nil,
                     sub_type_id: nil
                   }
                 ]
-              } == ControlPlus.activity_details()
+              } = ControlPlus.activities()
 
     end
   end
@@ -342,7 +344,6 @@ defmodule ControlPlus.ApiTest do
     use_cassette "corrupted" do
       assert {:error, {:invalid, "0", 9}} == ControlPlus.wait_list(-1)
       assert {:error, {:invalid, "0", 9}} == ControlPlus.reservations(-1)
-      assert {:error, {:invalid, "0", 9}} == ControlPlus.activity_details()
       assert {:error, {:invalid, "0", 9}} == ControlPlus.member_visits(-1)
       assert {:error, {:invalid, "0", 9}} == ControlPlus.client_details(-1)
       assert {:error, {:invalid, "0", 9}} == ControlPlus.activities()

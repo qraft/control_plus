@@ -29,26 +29,26 @@ defmodule ControlPlus.Api do
     end
   end
 
-  @doc "Returns a list of activities"
-  @spec activities :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
-  def activities do
-    case ControlPlus.ApiClient.fetch(:req_act_shedule, sub_type_id: "") do
-      {:ok, data} -> remap_schedules(data)
-      error -> error
-    end
-  end
+#  @doc "Returns a list of activities"
+#  @spec activities :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
+#  def activities do
+#    case ControlPlus.ApiClient.fetch(:req_act_shedule, sub_type_id: "") do
+#      {:ok, data} -> remap_schedules(data)
+#      error -> error
+#    end
+#  end
 
   @doc "returns a list of activities for a member. when no from and to are given, it defaults to the last year."
   @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def member_visits(client_id, from \\ nil, to \\ nil) do
-    to = to || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
+    to = to || Date.utc_today()
     from = from || ControlPlus.Helpers.DateHelper.format_date_days_ago(365)
     case ControlPlus.ApiClient.fetch(
            :req_current_reservations,
            params: [
              client_id: client_id,
              start_date: from,
-             end_date: to
+             end_date: ControlPlus.Helpers.DateHelper.format_date(to)
            ]
          ) do
       {:ok, data} -> remap_activities(data)
@@ -56,12 +56,13 @@ defmodule ControlPlus.Api do
     end
   end
 
-  @doc "returns a list of activity details for a given date, or otherwise today"
-  @spec activity_details(Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
-  def activity_details(date \\ nil) do
-    date = date || ControlPlus.Helpers.DateHelper.format_date(Timex.today)
-    case ControlPlus.ApiClient.fetch(:req_activity_group_details, date: date) do
-      {:ok, data} -> remap_activities(data)
+  #TODO this should by default get a range of a week in the future, in the activity
+  @doc "returns a list of activity for a given date, or otherwise today"
+  @spec activities(Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
+  def activities(date \\ nil) do
+    date = date || Date.utc_today()
+    case ControlPlus.ApiClient.fetch(:req_activity_group_details, date: ControlPlus.Helpers.DateHelper.format_date(date)) do
+      {:ok, data} -> remap_activities(data, date)
       error -> error
     end
   end
@@ -141,18 +142,22 @@ defmodule ControlPlus.Api do
     {:ok, map}
   end
 
-  @spec remap_activities(map) :: {:ok, [%ControlPlus.Activity{}]}
-  defp remap_activities(data) do
-    result = Enum.map(data["activities"], &ControlPlus.Activity.parse/1)
-
+  @spec remap_activities(map, Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]}
+  defp remap_activities(data, date \\ nil)
+  defp remap_activities(%{"activities" => activities}, date) do
+    result = Enum.map(activities, &ControlPlus.Activity.parse(&1, date))
+    {:ok, result}
+  end
+  defp remap_activities(%{"shedule" => activities}, date) do
+    result = Enum.map(activities, &ControlPlus.Activity.parse(&1, date))
     {:ok, result}
   end
 
-  @spec remap_schedules(map) :: {:ok, [%ControlPlus.Activity{}]}
-  defp remap_schedules(data) do
-    result = Enum.map(data["shedule"], &ControlPlus.Activity.parse/1)
-    {:ok, result}
-  end
+#  @spec remap_schedules(map) :: {:ok, [%ControlPlus.Activity{}]}
+#  defp remap_schedules(data) do
+#    result = Enum.map(data["shedule"], &ControlPlus.Activity.parse/2)
+#    {:ok, result}
+#  end
 
   @spec remap_reservations(map) :: {:ok, [%ControlPlus.Reservation{}]}
   defp remap_reservations(data) do

@@ -4,28 +4,28 @@ defmodule ControlPlus.Activity do
   """
 
   defstruct [
-    :max_capacity,
+    :control_plus_id,
     :count,
     :date,
     :description,
     :description_long,
+    :duration_in_minutes,
     :end_date,
     :end_time,
-    :control_plus_id,
+    :ends_at,
     :image,
+    :max_capacity,
     :name,
     :price,
     :schedule,
     :staff_id,
+    :staff_name,
     :start,
     :start_date,
     :start_time,
     :starts_at,
-    :ends_at,
     :status,
     :sub_type_id,
-    :staff_name,
-
   ]
 
   @mapping %{
@@ -40,8 +40,9 @@ defmodule ControlPlus.Activity do
     "start_time" => :start_time,
   }
 
-  @spec parse({String.t, map}) :: %ControlPlus.Activity{}
-  def parse({_id, data}) do
+  #TODO calc duration using start_time and end_time
+  @spec parse({String.t, map}, Date.t) :: %ControlPlus.Activity{}
+  def parse({_id, data}, date) do
     activities = Enum.reduce(
       data,
       %ControlPlus.Activity{},
@@ -49,16 +50,27 @@ defmodule ControlPlus.Activity do
         Map.put(client, map_key(key), ControlPlus.Helpers.CastHelper.cast(value))
       end
     )
+
     schedule = ControlPlus.Schedule.parse(activities.schedule)
+
     activities
     |> Map.delete(:schedule)
-    |> ControlPlus.Helpers.TimeHelper.compose_timestamps(schedule.start_time)
-#    {ControlPlus.Helpers.CastHelper.cast(id), result}
+    |> ControlPlus.Helpers.DateTimeHelper.compose_timestamps(%{date: date, time: schedule.start_time})
+    |> maybe_set_duration
+    #    {ControlPlus.Helpers.CastHelper.cast(id), result}
 
   end
 
   @spec map_key(String.t) :: atom
   defp map_key(key), do: Map.get(@mapping, key, String.to_atom(key))
 
+  defp maybe_set_duration(%{start_time: %Time{} = start_time, end_time: %Time{} = end_time} = data) do
+    duration = end_time
+               |> Time.diff(start_time)
+               |> Kernel./(60)
+               |> Kernel.round
 
+    Map.put(data, :duration_in_minutes, duration)
+  end
+  defp maybe_set_duration(data), do: data
 end

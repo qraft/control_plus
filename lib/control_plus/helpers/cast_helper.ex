@@ -74,8 +74,11 @@ defmodule ControlPlus.Helpers.CastHelper do
 
   @spec maybe_cast_to_datetime(any) :: any
   defp maybe_cast_to_datetime(value) when is_binary(value) do
-    case NaiveDateTime.from_iso8601(value) do
-      {:ok, date} -> date
+    with {:ok, naive_date_time} <- NaiveDateTime.from_iso8601(value),
+         {:ok, utc} <- ControlPlus.Helpers.DateTimeHelper.naive_to_utc(naive_date_time)
+      do
+      utc
+    else
       _ -> value
     end
   end

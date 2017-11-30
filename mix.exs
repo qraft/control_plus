@@ -48,6 +48,7 @@ defmodule ControlPlus.Mixfile do
       {:ex_doc, ">= 0.0.0", [only: :dev, runtime: false]},
       {:dialyxir, ">= 0.0.0", [only: :dev, runtime: false]},
       {:excoveralls, ">= 0.0.0", [only: :test, runtime: false]},
+      {:calendar, ">= 0.0.0"},
       {:exvcr, ">= 0.0.0", [only: :test]},
       {:hackney, ">= 0.0.0"},
       {:poison, ">= 0.0.0"},
