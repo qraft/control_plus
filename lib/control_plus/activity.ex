@@ -43,7 +43,7 @@ defmodule ControlPlus.Activity do
   #TODO calc duration using start_time and end_time
   @spec parse({String.t, map}, Date.t) :: %ControlPlus.Activity{}
   def parse({_id, data}, date) do
-    activities = Enum.reduce(
+    activity = Enum.reduce(
       data,
       %ControlPlus.Activity{},
       fn ({key, value}, client) ->
@@ -51,11 +51,11 @@ defmodule ControlPlus.Activity do
       end
     )
 
-    schedule = ControlPlus.Schedule.parse(activities.schedule)
+    schedule = ControlPlus.Schedule.parse(activity.schedule)
 
-    activities
+    activity
     |> Map.delete(:schedule)
-    |> ControlPlus.Helpers.DateTimeHelper.compose_timestamps(%{date: date, time: schedule.start_time})
+    |> ControlPlus.Helpers.DateTimeHelper.compose_timestamps(%{date: date, start_time: schedule.start_time, end_time: activity.end_time})
     |> maybe_set_duration
     #    {ControlPlus.Helpers.CastHelper.cast(id), result}
 

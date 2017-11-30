@@ -43,8 +43,16 @@ defmodule ControlPlus.Helpers.DateTimeHelper do
     utc
   end
 
-  def compose_timestamps(data, %{date: date, time: time}) when not is_nil(date) and not is_nil(time) do
-    process_timestamp(data, :starts_at, date, time)
+  def compose_timestamps(
+        data,
+        %{date: %Date{} = date, start_time: %Time{} = start_time, end_time: %Time{} = end_time}
+      ) do
+    data
+    |> process_timestamp(:starts_at, date, start_time)
+    |> process_timestamp(:ends_at, date, end_time)
+  end
+  def compose_timestamps(data, %{date: %Date{} = date, start_time: %Time{} = start_time}) do
+    process_timestamp(data, :starts_at, date, start_time)
   end
   def compose_timestamps(%{date: date, start: time} = data, _time) when not is_nil(date) and not is_nil(time) do
     process_timestamp(data, :starts_at, date, time)
