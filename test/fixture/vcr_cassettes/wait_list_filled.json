@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "ssl_options": {
+          "versions": [
+            "tlsv1.2"
+          ]
+        }
+      },
+      "request_body": "",
+      "url": "https://elitefit.opencontrolplus.com/cp_api?params%5Bdate_time%5D=04%2F12%2F2017+19%3A00%3A00&params%5Bactivity_id%5D=18574&key=558f5b7c12eae18e695fb40e37b0e50130a55201&method=get_waitlist"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":null,\"error\":\"0\",\"result\":{\"waitlist\":{\"1\":{\"user_name\":\"Amarantha Bakker\",\"user_id\":\"1215309\",\"id\":\"20808\"},\"2\":{\"user_name\":\"Rachid Al Maach\",\"user_id\":\"996388\",\"id\":\"20835\"}},\"activity_title\":\"PowerBuilding Deadlift\",\"end_time\":\"20:00:00\"}}",
+      "headers": {
+        "Date": "Mon, 04 Dec 2017 15:02:03 GMT",
+        "Server": "Apache/2.2.15 (CentOS)",
+        "Expires": "-1",
+        "Pragma": "no-cache",
+        "X-Runtime": "0.00701",
+        "Cache-Control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "X-Powered-By": "",
+        "ETag": "\"b2d9addcbe770028b83126bb24eee165\"",
+        "P3P": "policyref=\"/w3c/p3p.xml\", CP=\"NON DSP ADM DEV PSD IVDo OUR IND STP PHY PRE NAV UNI OHO:*.opencontrolplus.com\"",
+        "Set-Cookie": "_mysportpages_session_id_=2ddfb57c5a04fa69da0a401ed448c054; domain=.opencontrolplus.com; path=/; HttpOnly",
+        "Content-Length": "249",
+        "Last-Modified": "Mon, 04 Dec 2017 14:45:23 GMT",
+        "Status": "200 OK",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
