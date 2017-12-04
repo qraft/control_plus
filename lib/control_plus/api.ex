@@ -73,6 +73,7 @@ defmodule ControlPlus.Api do
 
     date_time = date_time || DateTime.utc_now
     formatted_date_time = ControlPlus.Helpers.DateHelper.format_date_time(date_time)
+    #TODO maybe convert UTC to Europe/Amsterdam
     case ControlPlus.ApiClient.fetch(
            :get_reservations,
            params: [

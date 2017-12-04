@@ -18,10 +18,8 @@ defmodule ControlPlus.Helpers.DateTimeHelper do
   end
 
   def naive_to_utc(%NaiveDateTime{} = datetime) do
-    case Calendar.DateTime.from_naive(datetime, "Europe/Amsterdam") do
-      {:ok, timezoned} -> Calendar.DateTime.shift_zone(timezoned, "Etc/UTC")
-      error -> error
-    end
+    {:ok, datetime} = Calendar.DateTime.from_naive(datetime, "Europe/Amsterdam")
+    Calendar.DateTime.shift_zone(datetime, "Etc/UTC")
   end
 
   def naive_to_utc(%Date{} = date, %Time{} = time) do
@@ -29,8 +27,6 @@ defmodule ControlPlus.Helpers.DateTimeHelper do
          {:ok, timezoned} <- Calendar.DateTime.from_naive(naive, "Europe/Amsterdam")
       do
       Calendar.DateTime.shift_zone(timezoned, "Etc/UTC")
-    else
-      error -> error
     end
   end
 
@@ -60,9 +56,7 @@ defmodule ControlPlus.Helpers.DateTimeHelper do
   def compose_timestamps(data), do: data
 
   defp process_timestamp(data, field, date, time) do
-    case naive_to_utc(date, time) do
-      {:ok, datetime} -> Map.put(data, field, datetime)
-      _ -> data
-    end
+    datetime = naive_to_utc!(date, time)
+    Map.put(data, field, datetime)
   end
 end
