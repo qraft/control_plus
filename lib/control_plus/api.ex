@@ -60,7 +60,7 @@ defmodule ControlPlus.Api do
   @spec activities(Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def activities(date \\ nil) do
     date = date || Date.utc_today()
-
+    IO.puts("Getting activities for : #{inspect date}")
     case ControlPlus.ApiClient.fetch(:req_activity_group_details, date: ControlPlus.Helpers.DateHelper.format_date(date)) do
       {:ok, data} -> remap_activities(data, date)
       error -> error
