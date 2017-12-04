@@ -129,87 +129,87 @@ defmodule ControlPlus.ApiTest do
     end
   end
 
-#  test "should get a list of activities" do
-#    use_cassette "get_activities" do
-#      assert  {
-#                :ok,
-#                [
-#                  %{
-#                    __struct__: ControlPlus.Activity,
-#                    control_plus_id: 16939,
-#                    count: nil,
-#                    date: nil,
-#                    description: nil,
-#                    description_long: nil,
-#                    duration_in_minutes: -1,
-#                    end_date: ~D[2019-03-17],
-#                    end_time: nil,
-#                    ends_at: %DateTime{},
-#                    image: nil,
-#                    max_capacity: nil,
-#                    name: "Your personal coach",
-#                    price: nil,
-#                    staff_id: nil,
-#                    staff_name: nil,
-#                    start: nil,
-#                    start_date: ~D[2017-02-27],
-#                    start_time: nil,
-#                    starts_at: %DateTime{},
-#                    status: nil,
-#                    sub_type_id: 0
-#                  },
-#                  %{
-#                    __struct__: ControlPlus.Activity,
-#                    control_plus_id: 18337,
-#                    count: nil,
-#                    date: nil,
-#                    description: nil,
-#                    description_long: nil,
-#                    duration_in_minutes: -1,
-#                    end_date: ~D[2023-03-17],
-#                    end_time: nil,
-#                    ends_at: %DateTime{},
-#                    image: nil,
-#                    max_capacity: nil,
-#                    name: "Your personal coach",
-#                    price: nil,
-#                    staff_id: nil,
-#                    staff_name: nil,
-#                    start: nil,
-#                    start_date: ~D[2017-02-27],
-#                    start_time: nil,
-#                    starts_at: %DateTime{},
-#                    status: nil,
-#                    sub_type_id: 0
-#                  },
-#                  %{
-#                    __struct__: ControlPlus.Activity,
-#                    control_plus_id: 17916,
-#                    count: nil,
-#                    date: nil,
-#                    description: nil,
-#                    description_long: nil,
-#                    duration_in_minutes: -1,
-#                    end_date: ~D[2017-06-05],
-#                    end_time: nil,
-#                    ends_at: %DateTime{},
-#                    image: nil,
-#                    max_capacity: nil,
-#                    name: "MURPH special",
-#                    price: nil,
-#                    staff_id: nil,
-#                    staff_name: nil,
-#                    start: nil,
-#                    start_date: ~D[2017-06-05],
-#                    start_time: nil,
-#                    starts_at: %DateTime{},
-#                    status: nil,
-#                    sub_type_id: 0
-#                  }
-#                ]
-#              } = ControlPlus.activities()
-#    end
-#  end
+  #  test "should get a list of activities" do
+  #    use_cassette "get_activities" do
+  #      assert  {
+  #                :ok,
+  #                [
+  #                  %{
+  #                    __struct__: ControlPlus.Activity,
+  #                    control_plus_id: 16939,
+  #                    count: nil,
+  #                    date: nil,
+  #                    description: nil,
+  #                    description_long: nil,
+  #                    duration_in_minutes: -1,
+  #                    end_date: ~D[2019-03-17],
+  #                    end_time: nil,
+  #                    ends_at: %DateTime{},
+  #                    image: nil,
+  #                    max_capacity: nil,
+  #                    name: "Your personal coach",
+  #                    price: nil,
+  #                    staff_id: nil,
+  #                    staff_name: nil,
+  #                    start: nil,
+  #                    start_date: ~D[2017-02-27],
+  #                    start_time: nil,
+  #                    starts_at: %DateTime{},
+  #                    status: nil,
+  #                    sub_type_id: 0
+  #                  },
+  #                  %{
+  #                    __struct__: ControlPlus.Activity,
+  #                    control_plus_id: 18337,
+  #                    count: nil,
+  #                    date: nil,
+  #                    description: nil,
+  #                    description_long: nil,
+  #                    duration_in_minutes: -1,
+  #                    end_date: ~D[2023-03-17],
+  #                    end_time: nil,
+  #                    ends_at: %DateTime{},
+  #                    image: nil,
+  #                    max_capacity: nil,
+  #                    name: "Your personal coach",
+  #                    price: nil,
+  #                    staff_id: nil,
+  #                    staff_name: nil,
+  #                    start: nil,
+  #                    start_date: ~D[2017-02-27],
+  #                    start_time: nil,
+  #                    starts_at: %DateTime{},
+  #                    status: nil,
+  #                    sub_type_id: 0
+  #                  },
+  #                  %{
+  #                    __struct__: ControlPlus.Activity,
+  #                    control_plus_id: 17916,
+  #                    count: nil,
+  #                    date: nil,
+  #                    description: nil,
+  #                    description_long: nil,
+  #                    duration_in_minutes: -1,
+  #                    end_date: ~D[2017-06-05],
+  #                    end_time: nil,
+  #                    ends_at: %DateTime{},
+  #                    image: nil,
+  #                    max_capacity: nil,
+  #                    name: "MURPH special",
+  #                    price: nil,
+  #                    staff_id: nil,
+  #                    staff_name: nil,
+  #                    start: nil,
+  #                    start_date: ~D[2017-06-05],
+  #                    start_time: nil,
+  #                    starts_at: %DateTime{},
+  #                    status: nil,
+  #                    sub_type_id: 0
+  #                  }
+  #                ]
+  #              } = ControlPlus.activities()
+  #    end
+  #  end
 
   test "member_visits_for_sync" do
     use_cassette "member_visits" do
@@ -329,17 +329,30 @@ defmodule ControlPlus.ApiTest do
   end
 
   test "it can get a waitlist" do
-    use_cassette "wait_list" do
-      date_time = DateTime.from_naive!(~N[2017-11-23 19:00:00.000], "Etc/UTC")
+    use_cassette "wait_list_empty" do
+      date_time = DateTime.from_naive!(~N[2017-12-05 19:00:00.000], "Etc/UTC")
 
       assert {
                :ok,
                %ControlPlus.WaitList{
                  activity_title: "PowerBuilding Bench",
                  end_time: ~T[20:00:00],
-                 waitlist: %{}
+                 waitlist: []
                }
-             } == ControlPlus.wait_list(18575, date_time)
+             } == ControlPlus.wait_list(18574, date_time)
+    end
+
+    use_cassette "wait_list_filled" do
+      date_time = DateTime.from_naive!(~N[2017-12-04 19:00:00.000], "Etc/UTC")
+
+      assert {
+               :ok,
+               %ControlPlus.WaitList{
+                 activity_title: "PowerBuilding Deadlift",
+                 end_time: ~T[20:00:00],
+                 waitlist: [1215309, 996388]
+               }
+             } == ControlPlus.wait_list(18574, date_time)
     end
   end
 

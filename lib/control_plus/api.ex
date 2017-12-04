@@ -29,15 +29,6 @@ defmodule ControlPlus.Api do
     end
   end
 
-#  @doc "Returns a list of activities"
-#  @spec activities :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
-#  def activities do
-#    case ControlPlus.ApiClient.fetch(:req_act_shedule, sub_type_id: "") do
-#      {:ok, data} -> remap_schedules(data)
-#      error -> error
-#    end
-#  end
-
   @doc "returns a list of activities for a member. when no from and to are given, it defaults to the last year."
   @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def member_visits(client_id, from \\ nil, to \\ nil) do
@@ -60,7 +51,6 @@ defmodule ControlPlus.Api do
   @spec activities(Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def activities(date \\ nil) do
     date = date || Date.utc_today()
-    IO.puts("Getting activities for : #{inspect date}")
     case ControlPlus.ApiClient.fetch(:req_activity_group_details, params: [date: ControlPlus.Helpers.DateHelper.format_date(date)]) do
       {:ok, data} -> remap_activities(data, date)
       error -> error
@@ -153,12 +143,6 @@ defmodule ControlPlus.Api do
     result = Enum.map(activities, &ControlPlus.Activity.parse(&1, date))
     {:ok, result}
   end
-
-#  @spec remap_schedules(map) :: {:ok, [%ControlPlus.Activity{}]}
-#  defp remap_schedules(data) do
-#    result = Enum.map(data["shedule"], &ControlPlus.Activity.parse/2)
-#    {:ok, result}
-#  end
 
   @spec remap_reservations(map) :: {:ok, [%ControlPlus.Reservation{}]}
   defp remap_reservations(data) do
