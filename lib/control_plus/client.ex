@@ -71,7 +71,7 @@ defmodule ControlPlus.Client do
   end
 
   @doc "Takes a %ControlPlus.Client{} struct and transforms that to a map which is accepted by the api to post"
-  @spec to_post_params(%ControlPlus.Client{}) :: map
+  @spec to_post_params(%ControlPlus.Client{}) :: [{atom, any}]
   def to_post_params(%ControlPlus.Client{} = client) do
     client
     |> Map.delete(:__struct__)

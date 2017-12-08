@@ -19,7 +19,7 @@ defmodule ControlPlus.Api do
   end
 
   @doc "Returns a paginated list of clients"
-  @spec paginated_clients(keyword) ::
+  @spec paginated_clients(keyword | nil) ::
           {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
           {:error, any}
   def paginated_clients(options \\ [page: 1, limit: 30]) do
