@@ -77,7 +77,7 @@ defmodule ControlPlus.Api do
   end
 
   @doc "returns a waiting list for a given activity and date, if no date given it uses today"
-  @spec wait_list(non_neg_integer, Date.t | nil) :: {:ok, %ControlPlus.WaitList{}} | {:error, any}
+  @spec wait_list(non_neg_integer, DateTime.t | nil) :: {:ok, %ControlPlus.WaitList{}} | {:error, any}
   def wait_list(activity_id, date_time \\ nil) do
 
     date_time = date_time || DateTime.utc_now
