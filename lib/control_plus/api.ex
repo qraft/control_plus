@@ -58,7 +58,7 @@ defmodule ControlPlus.Api do
   end
 
   @doc "returns reservations for a given activity and date, if no date given it uses today"
-  @spec reservations(non_neg_integer, Date.t | nil) :: {:ok, [%ControlPlus.Reservation{}]} | {:error, any}
+  @spec reservations(non_neg_integer, DateTime.t | nil) :: {:ok, [%ControlPlus.Reservation{}]} | {:error, any}
   def reservations(activity_id, date_time \\ nil) do
 
     date_time = date_time || DateTime.utc_now
