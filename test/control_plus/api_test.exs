@@ -84,6 +84,89 @@ defmodule ControlPlus.ApiTest do
     end
   end
 
+  test "should return an error when trying to get a list of clients with an invalid status" do
+    {
+      :error,
+      "invalid status something should be one of leads, leads_passive, leads_active, valid, not_valid, not_valid_recent, future, old, not_active, active, in_stop, in_medical_stop"
+    } = ControlPlus.paginated_clients_with_status(:something)
+  end
+
+  test "should get a list of clients with a certain status" do
+    use_cassette "get_clients_with_status" do
+      assert   {
+                 :ok,
+                 %{
+                   clients: [
+                     %ControlPlus.Client{
+                       bank_account: nil,
+                       birthdate: ~D[1984-06-09],
+                       brought_by: nil,
+                       campaign: nil,
+                       city: "Den Haag",
+                       club_card_amount: 0.0,
+                       club_id: nil,
+                       comment: "Aangemeld bij Demodag. Na telefonische intake afgesproken op de wachtlijst voor pilot 3 of 4 . Stopt per 1 aug. #06  heeft geen rede op gegeven.",
+                       control_plus_id: 1014557,
+                       country: "Netherlands",
+                       email: "test@user.com",
+                       entered: "Web-in",
+                       gender: "F",
+                       json_code: nil,
+                       labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
+                       lastname: "Testuser2",
+                       member_number: 45,
+                       mobile_phone: "0612345678",
+                       name: "Test",
+                       password: nil,
+                       personal_coach: nil,
+                       phone: nil,
+                       photo: nil,
+                       prefix: nil,
+                       province: nil,
+                       sales: nil,
+                       street: "Somewhere 123",
+                       updated_at: %DateTime{},
+                       zipcode: "2211GB"
+                     },
+                     %ControlPlus.Client{
+                       bank_account: nil,
+                       birthdate: ~D[1967-07-27],
+                       brought_by: nil,
+                       campaign: nil,
+                       city: "Amsterdam",
+                       club_card_amount: 0.0,
+                       club_id: nil,
+                       comment: "Just some comment here",
+                       control_plus_id: 1016570,
+                       country: "Netherlands",
+                       email: "someone@gmail.com",
+                       entered: "Web-in",
+                       gender: "M",
+                       json_code: nil,
+                       labels: "Afvallers /niet geselecteerd/ in de toekomst contacten",
+                       lastname: "Testuser",
+                       member_number: 24,
+                       mobile_phone: "0612345678",
+                       name: "Test",
+                       password: nil,
+                       personal_coach: nil,
+                       phone: nil,
+                       photo: nil,
+                       prefix: "Van den",
+                       province: nil,
+                       sales: nil,
+                       street: "Somestreet 1",
+                       updated_at: %DateTime{},
+                       zipcode: "1111AA"
+                     }
+                   ],
+                   current_page: 1,
+                   total_pages: 31
+                 }
+               } = ControlPlus.paginated_clients_with_status(:active)
+    end
+  end
+
 
   test "should get page 2 from the list of clients" do
     use_cassette "get_clients_page2" do

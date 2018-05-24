@@ -1,0 +1,71 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "head",
+      "options": [],
+      "request_body": "",
+      "url": "https://www.iana.org/time-zones/repository/tzdata-latest.tar.gz"
+    },
+    "response": {
+      "binary": false,
+      "body": null,
+      "headers": {
+        "Date": "Thu, 24 May 2018 06:47:07 GMT",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Security-Policy": "upgrade-insecure-requests",
+        "Location": "https://data.iana.org/time-zones/tzdata-latest.tar.gz",
+        "Cache-Control": "public, s-maxage=600, max-age=3600",
+        "Expires": "Thu, 24 May 2018 07:47:07 GMT",
+        "Content-Length": "0",
+        "content-type": "application/x-gzip",
+        "Server": "Apache",
+        "Strict-Transport-Security": "max-age=48211200; preload",
+        "X-Cache-Hits": "6",
+        "Connection": "keep-alive"
+      },
+      "status_code": 302,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "ssl_options": {
+          "versions": [
+            "tlsv1.2"
+          ]
+        }
+      },
+      "request_body": "",
+      "url": "https://elitefit.opencontrolplus.com/cp_api?params%5Bmemberships%5D=active&params%5Bpage%5D=&params%5Blimit%5D=&key=558f5b7c12eae18e695fb40e37b0e50130a55201&method=clients_list"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"error\":\"0\",\"id\":null,\"result\":{\"current_page\":\"1\",\"total_pages\":\"31\",\"users\":{\"1016570\":{\"photo\":\"\",\"sales\":\"\",\"club_card_amount\":\"0.0\",\"birthday\":\"1967-07-27\",\"campaign\":\"\",\"personal_coach\":\"\",\"phone\":\" 06 12345678\",\"city\":\"Amsterdam\",\"province\":\"\",\"sex\":\"M\",\"comment\":\"Just some comment here\",\"brought_by\":\"\",\"interjection\":\"Van den\",\"member_number\":\"24\",\"address\":\"Somestreet 1\",\"zipcode\":\"1111AA\",\"country\":\"Netherlands\",\"lastname\":\"Testuser\",\"updated_at\":\"2017-03-29 14:22:17\",\"labels\":\"Afvallers /niet geselecteerd/ in de toekomst contacten\",\"entered\":\"Web-in\",\"mob_phone\":\"\",\"email\":\"someone@gmail.com\",\"name\":\"Test\"},\"1014557\":{\"photo\":\"\",\"sales\":\"\",\"club_card_amount\":\"0.0\",\"birthday\":\"1984-06-09\",\"campaign\":\"\",\"personal_coach\":\"\",\"phone\":\"0612345678\",\"city\":\"Den Haag\",\"province\":\"\",\"sex\":\"F\",\"comment\":\"Aangemeld bij Demodag. Na telefonische intake afgesproken op de wachtlijst voor pilot 3 of 4 . Stopt per 1 aug. #06  heeft geen rede op gegeven.\",\"brought_by\":\"\",\"interjection\":\"\",\"member_number\":\"45\",\"address\":\"Somewhere 123\",\"zipcode\":\"2211GB\",\"country\":\"Netherlands\",\"lastname\":\"Testuser2\",\"updated_at\":\"2017-08-03 13:24:04\",\"labels\":\"Afvallers /niet geselecteerd/ in de toekomst contacten\",\"entered\":\"Web-in\",\"mob_phone\":\"0612345678\",\"email\":\"test@user.com\",\"name\":\"Test\"}}}}",
+      "headers": {
+        "Date": "Thu, 24 May 2018 06:47:34 GMT",
+        "Server": "Apache/2.2.15 (CentOS)",
+        "Pragma": "no-cache",
+        "P3P": "policyref=\"/w3c/p3p.xml\", CP=\"NON DSP ADM DEV PSD IVDo OUR IND STP PHY PRE NAV UNI OHO:*.opencontrolplus.com\"",
+        "Cache-Control": "no-cache, no-store, must-revalidate, pre-check=0, post-check=0",
+        "Expires": "-1",
+        "ETag": "\"d57287726146de748bb4032319f673d1\"",
+        "X-Powered-By": "",
+        "X-Runtime": "4.66846",
+        "Set-Cookie": "_mysportpages_session_id_=343342c3f03c5219ab88b91cfcef845e; domain=.opencontrolplus.com; path=/; HttpOnly",
+        "Content-Length": "179480",
+        "Last-Modified": "Thu, 24 May 2018 06:30:54 GMT",
+        "Status": "200 OK",
+        "Vary": "Accept-Encoding",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

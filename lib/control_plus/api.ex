@@ -3,6 +3,21 @@ defmodule ControlPlus.Api do
   This module wraps the API of Control Plus.
   """
 
+  @valid_statuses [
+    :leads,
+    :leads_passive,
+    :leads_active,
+    :valid,
+    :not_valid,
+    :not_valid_recent,
+    :future,
+    :old,
+    :not_active,
+    :active,
+    :in_stop,
+    :in_medical_stop
+  ]
+
   @doc "Returns all the details of a client"
   @spec client_details(non_neg_integer) :: {:ok, %ControlPlus.Client{}} | {:error, any}
   def client_details(client_id) do
@@ -23,11 +38,40 @@ defmodule ControlPlus.Api do
           {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
           {:error, any}
   def paginated_clients(options \\ [page: 1, limit: 30]) do
-    case ControlPlus.ApiClient.fetch(:clients_list, params: [page: options[:page], limit: options[:limit]]) do
+    case ControlPlus.ApiClient.fetch(
+           :clients_list,
+           params: [
+             page: options[:page],
+             limit: options[:limit]
+           ]
+         ) do
       {:ok, data} -> remap_users(data)
       error -> error
     end
   end
+
+  @doc "Returns a paginated list of clients"
+  @spec paginated_clients_with_status(atom, keyword | nil) ::
+          {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
+          {:error, any}
+  def paginated_clients_with_status(status, options \\ [page: 1, limit: 30]) do
+    if valid_status?(status) do
+      case ControlPlus.ApiClient.fetch(
+             :clients_list,
+             params: [
+               memberships: Atom.to_string(status),
+               page: options[:page],
+               limit: options[:limit]
+             ]
+           ) do
+        {:ok, data} -> remap_users(data)
+        error -> error
+      end
+    else
+      {:error, "invalid status #{status} should be one of #{Enum.join(@valid_statuses, ", ")}"}
+    end
+  end
+
 
   @doc "returns a list of activities for a member. when no from and to are given, it defaults to the last year."
   @spec member_visits(non_neg_integer, Date.t | nil, Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
@@ -51,7 +95,12 @@ defmodule ControlPlus.Api do
   @spec activities(Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]} | {:error, any}
   def activities(date \\ nil) do
     date = date || Date.utc_today()
-    case ControlPlus.ApiClient.fetch(:req_activity_group_details, params: [date: ControlPlus.Helpers.DateHelper.format_date(date)]) do
+    case ControlPlus.ApiClient.fetch(
+           :req_activity_group_details,
+           params: [
+             date: ControlPlus.Helpers.DateHelper.format_date(date)
+           ]
+         ) do
       {:ok, data} -> remap_activities(data, date)
       error -> error
     end
@@ -155,4 +204,6 @@ defmodule ControlPlus.Api do
 
   @spec remap_wait_list(map) :: {:ok, map}
   defp remap_wait_list(data), do: {:ok, ControlPlus.WaitList.parse(data)}
+
+  defp valid_status?(status), do: Enum.member?(@valid_statuses, status)
 end
