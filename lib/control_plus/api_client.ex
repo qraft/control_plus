@@ -5,7 +5,7 @@ defmodule ControlPlus.ApiClient do
 
   use Tesla
 
-  adapter :hackney, [ssl_options: [{:versions, [:'tlsv1.2']}]]
+  adapter Tesla.Adapter.Hackney, [ssl_options: [{:versions, [:'tlsv1.2']}]]
   plug Tesla.Middleware.BaseUrl,
        "https://#{Application.get_env(:control_plus, :client_name)}.opencontrolplus.com"
 
