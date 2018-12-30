@@ -37,12 +37,13 @@ defmodule ControlPlus.Api do
   @spec paginated_clients(keyword | nil) ::
           {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
           {:error, any}
-  def paginated_clients(options \\ [page: 1, limit: 30]) do
+  def paginated_clients(options \\ [page: 1, limit: 30, status: :active]) do
     case ControlPlus.ApiClient.fetch(
            :clients_list,
            params: [
              page: options[:page],
-             limit: options[:limit]
+             limit: options[:limit],
+             memberships: Atom.to_string(options[:status])
            ]
          ) do
       {:ok, data} -> remap_users(data)

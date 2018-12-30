@@ -32,7 +32,8 @@ defmodule ControlPlus.Client do
     :sales,
     :gender,
     :updated_at,
-    :zipcode
+    :zipcode,
+    :subscriptions
   ]
 
   @mapping %{
@@ -52,6 +53,7 @@ defmodule ControlPlus.Client do
     "members_sex" => :gender,
     "sex" => :gender,
     "members_zipcode" => :zipcode,
+    "inscriptions" => :subscriptions
   }
 
   @country_id_mapping %{"Netherlands" => 159, "Belgium" => 20}
@@ -68,6 +70,7 @@ defmodule ControlPlus.Client do
     |> Map.put(:control_plus_id, ControlPlus.Helpers.CastHelper.cast(id))
     |> maybe_set_phone_to_mobile_phone
     |> maybe_fix_mobile_phone
+    |> maybe_parse_subscriptions
   end
 
   @doc "Takes a %ControlPlus.Client{} struct and transforms that to a map which is accepted by the api to post"
@@ -131,4 +134,18 @@ defmodule ControlPlus.Client do
     Map.put(client, :mobile_phone, clean_number)
   end
   defp maybe_fix_mobile_phone(client), do: client
+
+  defp maybe_parse_subscriptions(%{subscriptions: nil} = client) do
+    Map.put(client, :subscriptions, [])
+  end
+  defp maybe_parse_subscriptions(%{subscriptions: subscriptions} = client) when is_map(subscriptions) do
+    subscriptions_as_list = Enum.map(subscriptions,
+      fn(item) -> item
+                  |> Tuple.to_list
+                  |> List.last
+                  |> ControlPlus.Subscription.parse()
+      end)
+    Map.put(client, :subscriptions, subscriptions_as_list)
+  end
+  defp maybe_parse_subscriptions(client), do: client
 end

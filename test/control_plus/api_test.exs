@@ -43,7 +43,8 @@ defmodule ControlPlus.ApiTest do
                        sales: nil,
                        street: "Somewhere 123",
                        updated_at: %DateTime{},
-                       zipcode: "2211GB"
+                       zipcode: "2211GB",
+                       subscriptions: []
                      },
                      %ControlPlus.Client{
                        bank_account: nil,
@@ -74,13 +75,28 @@ defmodule ControlPlus.ApiTest do
                        sales: nil,
                        street: "Somestreet 1",
                        updated_at: %DateTime{},
-                       zipcode: "1111AA"
+                       zipcode: "1111AA",
+                       subscriptions: subscriptions
                      }
                    ],
                    current_page: 1,
                    total_pages: 31
                  }
                } = ControlPlus.paginated_clients()
+
+      assert 24 = subscriptions |> Enum.count()
+      assert %ControlPlus.Subscription{
+               end_date: ~D[2016-09-30],
+               id: 3164644,
+               last_visit: nil,
+               max_visit: nil,
+               start_date: ~D[2016-09-20],
+               stop_date: nil,
+               type: 3,
+               type_id: 13401,
+               type_name: "Semi Personal Training pilot",
+               visit_done: nil
+             } = subscriptions |> Enum.at(0)
     end
   end
 
@@ -127,6 +143,7 @@ defmodule ControlPlus.ApiTest do
                        street: "Somewhere 123",
                        updated_at: %DateTime{},
                        zipcode: "2211GB"
+
                      },
                      %ControlPlus.Client{
                        bank_account: nil,
