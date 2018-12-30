@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="ELIXIR_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/_build/dev/lib/control_plus/ebin" />
+    <output-test url="file://$MODULE_DIR$/_build/test/lib/control_plus/ebin" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/bunt" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/calendar" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/certifi" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/combine" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/cortex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/credo" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/dialyxir" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/earmark" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ex_doc" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/file_system" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/gettext" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/hackney" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/idna" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/metrics" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/mimerl" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/poison" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ssl_verify_fun" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/tesla" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/timex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/tzdata" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/unicode_util_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/calendar" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/certifi" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/combine" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/cortex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/exactor" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/excoveralls" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/exjsx" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/exvcr" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/file_system" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/gettext" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/hackney" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/idna" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/jsx" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/meck" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/metrics" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/mimerl" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/poison" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ssl_verify_fun" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/tesla" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/timex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/tzdata" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/unicode_util_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix_html" />
+      <excludeFolder url="file://$MODULE_DIR$/cover" />
+      <excludeFolder url="file://$MODULE_DIR$/deps" />
+      <excludeFolder url="file://$MODULE_DIR$/doc" />
+      <excludeFolder url="file://$MODULE_DIR$/logs" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="cortex" level="project" />
+    <orderEntry type="library" name="credo" level="project" />
+    <orderEntry type="library" name="ex_doc" level="project" />
+    <orderEntry type="library" name="dialyxir" level="project" />
+    <orderEntry type="library" name="excoveralls" level="project" />
+    <orderEntry type="library" name="calendar" level="project" />
+    <orderEntry type="library" name="exvcr" level="project" />
+    <orderEntry type="library" name="hackney" level="project" />
+    <orderEntry type="library" name="poison" level="project" />
+    <orderEntry type="library" name="tesla" level="project" />
+    <orderEntry type="library" name="timex" level="project" />
+    <orderEntry type="library" name="file_system" level="project" />
+    <orderEntry type="library" name="ex_dash" level="project" />
+    <orderEntry type="library" name="bunt" level="project" />
+    <orderEntry type="library" name="inch_ex" level="project" />
+    <orderEntry type="library" name="coverex" level="project" />
+    <orderEntry type="library" name="earmark" level="project" />
+    <orderEntry type="library" name="cmark" level="project" />
+    <orderEntry type="library" name="mock" level="project" />
+    <orderEntry type="library" name="meck" level="project" />
+    <orderEntry type="library" name="exjsx" level="project" />
+    <orderEntry type="library" name="tzdata" level="project" />
+    <orderEntry type="library" name="exactor" level="project" />
+    <orderEntry type="library" name="ibrowse" level="project" />
+    <orderEntry type="library" name="httpotion" level="project" />
+    <orderEntry type="library" name="httpoison" level="project" />
+    <orderEntry type="library" name="http_server" level="project" />
+    <orderEntry type="library" name="benchfella" level="project" />
+    <orderEntry type="library" name="jiffy" level="project" />
+    <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="jazz" level="project" />
+    <orderEntry type="library" name="mime" level="project" />
+    <orderEntry type="library" name="fuse" level="project" />
+    <orderEntry type="library" name="httparrot" level="project" />
+    <orderEntry type="library" name="mix_test_watch" level="project" />
+    <orderEntry type="library" name="combine" level="project" />
+    <orderEntry type="library" name="gettext" level="project" />
+    <orderEntry type="library" name="dialyze" level="project" />
+    <orderEntry type="library" name="jsx" level="project" />
+    <orderEntry type="library" name="mixunit" level="project" />
+  </component>
+</module>
