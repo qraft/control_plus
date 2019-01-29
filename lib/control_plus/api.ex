@@ -177,8 +177,8 @@ defmodule ControlPlus.Api do
   defp remap_users(data) do
     map = %{}
           |> Map.put(:clients, Enum.map(data["users"], &ControlPlus.Client.parse/1))
-          |> Map.put(:total_pages, String.to_integer(data["total_pages"]))
-          |> Map.put(:current_page, String.to_integer(data["current_page"]))
+          |> Map.put(:total_pages, data["total_pages"])
+          |> Map.put(:current_page, data["current_page"])
 
     {:ok, map}
   end
