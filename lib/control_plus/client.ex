@@ -53,13 +53,15 @@ defmodule ControlPlus.Client do
     "members_sex" => :gender,
     "sex" => :gender,
     "members_zipcode" => :zipcode,
-    "inscriptions" => :subscriptions
+    "inscriptions" => :subscriptions,
+    "bank_account" => :iban
   }
 
   @country_id_mapping %{"Netherlands" => 159, "Belgium" => 20}
 
   @spec parse({String.t, map}) :: map
   def parse({id, data}) do
+
     data
     |> Enum.reduce(
          %ControlPlus.Client{},
@@ -139,6 +141,7 @@ defmodule ControlPlus.Client do
     Map.put(client, :subscriptions, [])
   end
   defp maybe_parse_subscriptions(%{subscriptions: subscriptions} = client) when is_map(subscriptions) do
+    raise "parse subscription #{inspect subscriptions}"
     subscriptions_as_list = Enum.map(subscriptions,
       fn(item) -> item
                   |> Tuple.to_list
