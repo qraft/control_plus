@@ -4,7 +4,6 @@ defmodule ControlPlus.Client do
   """
 
   defstruct [
-    :street,
     :bank_account,
     :birthdate,
     :brought_by,
@@ -13,11 +12,12 @@ defmodule ControlPlus.Client do
     :club_card_amount,
     :club_id,
     :comment,
+    :control_plus_id,
     :country,
     :email,
     :entered,
-    :control_plus_id,
-    :prefix,
+    :gender,
+    :iban,
     :json_code,
     :labels,
     :lastname,
@@ -28,12 +28,13 @@ defmodule ControlPlus.Client do
     :personal_coach,
     :phone,
     :photo,
+    :prefix,
     :province,
     :sales,
-    :gender,
+    :street,
+    :subscriptions,
     :updated_at,
-    :zipcode,
-    :subscriptions
+    :zipcode
   ]
 
   @mapping %{
