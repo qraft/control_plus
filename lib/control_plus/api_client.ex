@@ -27,7 +27,8 @@ defmodule ControlPlus.ApiClient do
     |> handle_response
   end
 
-  @spec handle_response(map) :: {:ok, map} | {:error, any}
+  @spec handle_response(map | {:ok, map}) :: {:ok, map} | {:error, any}
+  defp handle_response({:ok, response}), do: handle_response(response) #updated tesla now returns {:ok, response}
   defp handle_response(%{status: 200, body: json}) do
     json
     |> Poison.decode()
