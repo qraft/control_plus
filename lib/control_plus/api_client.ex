@@ -5,14 +5,12 @@ defmodule ControlPlus.ApiClient do
 
   use Tesla
 
-  adapter(Tesla.Adapter.Hackney, ssl_options: [{:versions, [:"tlsv1.2"]}])
+  adapter(Tesla.Adapter.Hackney, ssl_options: [{:versions, [:"tlsv1.2"]}], recv_timeout: 60_000)
 
   plug(
     Tesla.Middleware.BaseUrl,
     "https://#{Application.get_env(:control_plus, :client_name)}.opencontrolplus.com"
   )
-
-  plug(Tesla.Middleware.Timeout, timeout: 20_000)
 
   @doc """
   A short hand method to fetch the data from the opencontrolplus api used by `ControlPlus.Api`
