@@ -4,7 +4,6 @@ defmodule ControlPlus.Client do
   """
 
   defstruct [
-    :street,
     :bank_account,
     :birthdate,
     :brought_by,
@@ -13,11 +12,12 @@ defmodule ControlPlus.Client do
     :club_card_amount,
     :club_id,
     :comment,
+    :control_plus_id,
     :country,
     :email,
     :entered,
-    :control_plus_id,
-    :prefix,
+    :gender,
+    :iban,
     :json_code,
     :labels,
     :lastname,
@@ -28,12 +28,13 @@ defmodule ControlPlus.Client do
     :personal_coach,
     :phone,
     :photo,
+    :prefix,
     :province,
     :sales,
-    :gender,
+    :street,
+    :subscriptions,
     :updated_at,
-    :zipcode,
-    :subscriptions
+    :zipcode
   ]
 
   @mapping %{
@@ -53,13 +54,15 @@ defmodule ControlPlus.Client do
     "members_sex" => :gender,
     "sex" => :gender,
     "members_zipcode" => :zipcode,
-    "inscriptions" => :subscriptions
+    "inscriptions" => :subscriptions,
+    "bank_account" => :iban
   }
 
   @country_id_mapping %{"Netherlands" => 159, "Belgium" => 20}
 
   @spec parse({String.t, map}) :: map
   def parse({id, data}) do
+
     data
     |> Enum.reduce(
          %ControlPlus.Client{},
@@ -139,6 +142,7 @@ defmodule ControlPlus.Client do
     Map.put(client, :subscriptions, [])
   end
   defp maybe_parse_subscriptions(%{subscriptions: subscriptions} = client) when is_map(subscriptions) do
+    raise "parse subscription #{inspect subscriptions}"
     subscriptions_as_list = Enum.map(subscriptions,
       fn(item) -> item
                   |> Tuple.to_list

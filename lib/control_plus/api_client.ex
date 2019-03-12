@@ -5,9 +5,14 @@ defmodule ControlPlus.ApiClient do
 
   use Tesla
 
-  adapter Tesla.Adapter.Hackney, [ssl_options: [{:versions, [:'tlsv1.2']}]]
-  plug Tesla.Middleware.BaseUrl,
-       "https://#{Application.get_env(:control_plus, :client_name)}.opencontrolplus.com"
+  adapter(Tesla.Adapter.Hackney, ssl_options: [{:versions, [:"tlsv1.2"]}])
+
+  plug(
+    Tesla.Middleware.BaseUrl,
+    "https://#{Application.get_env(:control_plus, :client_name)}.opencontrolplus.com"
+  )
+
+  plug(Tesla.Middleware.Timeout, timeout: 10_000)
 
   plug Tesla.Middleware.Timeout, timeout: 20_000
 
@@ -24,18 +29,23 @@ defmodule ControlPlus.ApiClient do
     |> handle_response
   end
 
-  @spec handle_response(map) :: {:ok, map} | {:error, any}
+  @spec handle_response(map | {:ok, map}) :: {:ok, map} | {:error, any}
+  defp handle_response({:ok, response}), do: handle_response(response) #updated tesla now returns {:ok, response}
   defp handle_response(%{status: 200, body: json}) do
     json
-    |> Poison.decode
+    |> Poison.decode()
     |> handle_json
   end
+
   defp handle_response(%{status: status}), do: {:error, status}
 
   @spec handle_json({:ok, map} | {:error, any}) :: {:ok, map} | {:error, any}
   defp handle_json({:ok, %{"error" => "0", "result" => data}}), do: {:ok, data}
-  defp handle_json({:ok, %{"error" => _error_code, "error_message" => message}}) when message != "",
+
+  defp handle_json({:ok, %{"error" => _error_code, "error_message" => message}})
+       when message != "",
        do: {:error, message}
+
   defp handle_json({:ok, %{"error" => "3"}}), do: {:error, :no_data_found}
   defp handle_json({:ok, %{"error" => error_code}}), do: {:error, error_code}
   defp handle_json(error), do: error
