@@ -12,9 +12,7 @@ defmodule ControlPlus.ApiClient do
     "https://#{Application.get_env(:control_plus, :client_name)}.opencontrolplus.com"
   )
 
-  plug(Tesla.Middleware.Timeout, timeout: 10_000)
-
-  plug Tesla.Middleware.Timeout, timeout: 20_000
+  plug(Tesla.Middleware.Timeout, timeout: 20_000)
 
   @doc """
   A short hand method to fetch the data from the opencontrolplus api used by `ControlPlus.Api`
