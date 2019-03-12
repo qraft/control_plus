@@ -142,7 +142,6 @@ defmodule ControlPlus.Client do
     Map.put(client, :subscriptions, [])
   end
   defp maybe_parse_subscriptions(%{subscriptions: subscriptions} = client) when is_map(subscriptions) do
-    raise "parse subscription #{inspect subscriptions}"
     subscriptions_as_list = Enum.map(subscriptions,
       fn(item) -> item
                   |> Tuple.to_list
