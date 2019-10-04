@@ -37,7 +37,7 @@ defmodule ControlPlus.Api do
   @spec paginated_clients(keyword | nil) ::
           {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
           {:error, any}
-  def paginated_clients(options \\ [page: 1, limit: 30]) do
+  def paginated_clients(options \\ [page: 1, limit: 100]) do
     case ControlPlus.ApiClient.fetch(
            :clients_list,
            params: [
@@ -55,7 +55,7 @@ defmodule ControlPlus.Api do
   @spec paginated_clients_with_status(atom, keyword | nil) ::
           {:ok, %{total_pages: non_neg_integer, current_page: non_neg_integer, clients: [%ControlPlus.Client{}]}} |
           {:error, any}
-  def paginated_clients_with_status(status, options \\ [page: 1, limit: 30]) do
+  def paginated_clients_with_status(status, options \\ [page: 1, limit: 100]) do
     if valid_status?(status) do
       case ControlPlus.ApiClient.fetch(
              :clients_list,
