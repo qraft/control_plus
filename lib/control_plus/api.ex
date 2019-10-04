@@ -177,10 +177,18 @@ defmodule ControlPlus.Api do
   defp remap_users(data) do
     map = %{}
           |> Map.put(:clients, Enum.map(data["users"], &ControlPlus.Client.parse/1))
-          |> Map.put(:total_pages, data["total_pages"])
-          |> Map.put(:current_page, data["current_page"])
+          |> Map.put(:total_pages, maybe_parse_string(data["total_pages"]))
+          |> Map.put(:current_page, maybe_parse_string(data["current_page"]))
 
     {:ok, map}
+  end
+
+  @spec maybe_parse_string(String.t()) :: number
+  defp maybe_parse_string(input) do
+    case is_binary(input) do
+      true -> String.to_integer(input)
+      _ -> input
+    end
   end
 
   @spec remap_activities(map, Date.t | nil) :: {:ok, [%ControlPlus.Activity{}]}

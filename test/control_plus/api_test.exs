@@ -196,7 +196,7 @@ defmodule ControlPlus.ApiTest do
       assert {
                :ok,
                %ControlPlus.Client{
-                 bank_account: "NL08INGB0123456789",
+                 bank_account: nil,
                  birthdate: ~D[1981-06-24],
                  brought_by: nil,
                  campaign: nil,
@@ -222,8 +222,9 @@ defmodule ControlPlus.ApiTest do
                  sales: nil,
                  street: "Somestreet 1",
                  gender: "F",
+                 subscriptions: [],
                  updated_at: nil,
-                 zipcode: "1111AB"
+                 zipcode: "1111AB",
                }
              } = ControlPlus.client_details(1017831)
     end
